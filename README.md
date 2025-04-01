@@ -5,17 +5,14 @@ A full-stack university student portal that enables students to manage their aca
 📅 Track deadlines and upcoming academic tasks
 📊 Monitor progress and view course materials
 🔔 Receive notifications for assignments and updates
+
 ✨ Features:
 
-    User Authentication: Secure login and account management
-
-    File Management: Upload, delete, and manage academic files
-
-    Dashboard Overview: Track assignments, courses, and due dates
-
-    Role-Based Access: Admin and student functionalities
-
-    Responsive Design: Works on desktop and mobile devices
+User Authentication: Secure login and account management
+File Management: Upload, delete, and manage academic files
+Dashboard Overview: Track assignments, courses, and due dates
+Role-Based Access: Admin and student functionalities
+Responsive Design: Works on desktop and mobile devices
 
 📌 Tech Stack:
 
