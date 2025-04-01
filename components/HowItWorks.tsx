@@ -1,17 +1,29 @@
 import { Step } from '../types';
-import { FaUserGraduate} from 'react-icons/fa';
+import { FaClipboardList, FaRocket, FaUserGraduate} from 'react-icons/fa';
 
 const steps: Step[] = [
   {
     step: "01",
     icon: <FaUserGraduate className="text-3xl text-white" />,
-    title: "Create Your Profile",
-    description: "Set up your academic profile with your courses, goals, and preferences.",
+    title: "Setup Your Profile",
+    description: "Add your academic details, courses, and personal goals in less than 2 minutes.",
     color: "bg-blue-600"
   },
-  // Add other steps here...
+  {
+    step: "02",
+    icon: <FaClipboardList className="text-3xl text-white" />,
+    title: "Import Schedule",
+    description: "Connect your university account or manually enter classes, assignments, and exams.",
+    color: "bg-green-600"
+  },
+  {
+    step: "03",
+    icon: <FaRocket className="text-3xl text-white" />,
+    title: "Start Achieving",
+    description: "Get personalized study plans and track your progress with smart analytics.",
+    color: "bg-purple-600"
+  }
 ];
-
 const HowItWorks = () => {
   return (
     <section id="how-it-works" className="py-20 bg-white">

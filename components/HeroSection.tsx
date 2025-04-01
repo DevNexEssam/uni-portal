@@ -53,8 +53,6 @@ const HeroSection = () => {
                 quality={100}
                 priority
               />
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-100/20 to-indigo-100/20 pointer-events-none"></div>
             </div>
           </div>
         </div>

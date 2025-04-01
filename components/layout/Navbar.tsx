@@ -3,7 +3,7 @@ import { FaBook } from 'react-icons/fa';
 
 const Navbar = () => {
   return (
-    <nav className="bg-white shadow-sm py-4 px-6 sticky top-0 z-50">
+    <nav className="bg-white shadow-sm py-6 px-6 z-50">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-2">
           <FaBook className="text-blue-600 text-2xl" />

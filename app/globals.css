@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+*{
+  scroll-behavior: smooth;
+}
+
 @theme inline {
   --color-border: #e5e7eb;
   --color-input: #e5e7eb;
