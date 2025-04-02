@@ -27,7 +27,9 @@ Responsive Design: Works on desktop and mobile devices
 📌 Tech Stack:
 
 🚀 Frontend: Next.js, Tailwind CSS
-🛠️ Backend: Node.js, Express.js
+
+🛠️ Backend: Next.js
+
 💾 Database: MongoDB (Mongoose)
 
 🔗 Live Demo: [Link to Demo]
