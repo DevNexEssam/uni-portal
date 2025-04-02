@@ -6,16 +6,27 @@ const faqs: FAQItem[] = [
     question: "Is AcademicDash really free?",
     answer: "Yes! Our core features are completely free for students."
   },
-  // Add other FAQs...
+  {
+    question: "Is AcademicDash really free?",
+    answer: "Yes! Our core features are completely free for students."
+  },
+  {
+    question: "Is AcademicDash really free?",
+    answer: "Yes! Our core features are completely free for students."
+  },
+  {
+    question: "Is AcademicDash really free?",
+    answer: "Yes! Our core features are completely free for students."
+  },
 ];
 
 const FAQSection = () => {
   return (
-    <section id="faq" className="py-20 bg-gray-50">
+    <section id="faq" className="py-20 bg-background-secondary">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center">
-          <h2 className="text-4xl font-bold">Frequently Asked Questions</h2>
-          <p className="mt-4 text-xl text-gray-600">
+          <h2 className="text-4xl font-bold text-text">Frequently Asked Questions</h2>
+          <p className="mt-4 text-xl text-text-secondary">
             Everything you need to know about AcademicDash.
           </p>
         </div>
@@ -23,13 +34,13 @@ const FAQSection = () => {
           {faqs.map((faq, index) => (
             <details 
               key={index} 
-              className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition cursor-pointer"
+              className="bg-background p-6 rounded-xl shadow-sm hover:shadow-md transition cursor-pointer"
             >
               <summary className="flex justify-between items-center list-none">
-                <h3 className="text-xl font-medium">{faq.question}</h3>
-                <FaQuestionCircle className="text-blue-500 text-xl" />
+                <h3 className="text-xl font-medium text-text">{faq.question}</h3>
+                <FaQuestionCircle className="text-primary text-xl" />
               </summary>
-              <p className="mt-4 text-gray-600">{faq.answer}</p>
+              <p className="mt-4 text-text-secondary">{faq.answer}</p>
             </details>
           ))}
         </div>
