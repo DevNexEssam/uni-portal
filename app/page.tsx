@@ -4,6 +4,7 @@ import FAQSection from "../components/FAQSection";
 import FeaturesSection from "../components/FeaturesSection";
 import HeroSection from "../components/HeroSection";
 import HowItWorks from "../components/HowItWorks";
+import Footer from "../components/layout/Footer";
 import Navbar from "../components/layout/Navbar";
 import MobileAppSection from "../components/MobileAppSection";
 import PricingSection from "../components/PricingSection";
@@ -24,6 +25,7 @@ const Home = () => {
       <FAQSection />
       <CTASection />
       <ContactSection />
+      <Footer />
     </div>
   );
 };

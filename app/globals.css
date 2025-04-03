@@ -6,7 +6,7 @@
 
 @theme inline {
   --color-primary: #2257F7;
-  --color-primary-light: #4C7DD0;
+  --color-primary-light: #4A73EB;
   --color-primary-dark: #432FD9;
 
   --color-success: #1E8449;
@@ -14,7 +14,7 @@
   --color-error: #C0392B;
 
   --color-background: #F8F9FA;
-  --color-background-secondary: #E9ECEF;
+  --color-background-secondary: #F8F9FA;
 
   --color-text: #212529;
   --color-text-secondary: #6C757D;

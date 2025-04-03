@@ -1,25 +1,25 @@
-import Link from 'next/link';
-import { FaBook } from 'react-icons/fa';
+import Link from "next/link";
+import { GiBookmarklet } from "react-icons/gi";
 
 const Navbar = () => {
   const navLinks = [
-    { id: 'features', label: 'Features' },
-    { id: 'how-it-works', label: 'How It Works' },
-    { id: 'testimonials', label: 'Testimonials' },
-    { id: 'faq', label: 'FAQ' }
+    { id: "features", label: "Features" },
+    { id: "how-it-works", label: "How It Works" },
+    { id: "testimonials", label: "Testimonials" },
+    { id: "faq", label: "FAQ" },
   ];
 
   return (
     <nav className="bg-background shadow-sm py-6 px-6 z-50 sticky top-0">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-2">
-          <FaBook className="text-primary text-2xl" />
-          <span className="font-bold text-xl text-text">AcademicDash</span>
+          <GiBookmarklet className="text-primary text-2xl" />
+          <span className="font-bold text-xl text-text">UniFlow</span>
         </Link>
-        
+
         <div className="hidden md:flex space-x-8">
           {navLinks.map((link) => (
-            <Link 
+            <Link
               key={link.id}
               href={`#${link.id}`}
               className="text-text hover:text-primary transition-colors duration-200"
@@ -30,8 +30,8 @@ const Navbar = () => {
         </div>
 
         <div>
-          <Link 
-            href="/signup" 
+          <Link
+            href="/signup"
             className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-200"
           >
             Sign Up Free
