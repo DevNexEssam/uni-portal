@@ -34,3 +34,14 @@ export interface Feature {
     buttonText: string;
     buttonVariant: 'primary' | 'secondary';
   }
+
+  // CardComponent Props
+  export interface CardComponentProps {
+    title: string;
+    count: number | string;
+    icon?: React.ReactNode;
+    iconClass?: string;
+    link?: string;
+    colorClass?: string;
+    children?: React.ReactNode;
+  }

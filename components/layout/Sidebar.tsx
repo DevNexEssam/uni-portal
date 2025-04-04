@@ -38,7 +38,7 @@ const Sidebar = () => {
     <aside className="relative bg-primary h-screen flex flex-col border-r border-primary-light">
       {/* Toggle Button */}
       <button
-        className="absolute bottom-50 right-0 p-2 bg-primary-light rounded-l-md text-white cursor-pointer"
+        className="hidden md:block absolute bottom-50 right-0 p-2 bg-primary-light rounded-l-md text-white cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <span className="text-lg">{isExpanded ? <CgSidebar /> : <CgSidebarRight />}</span>

@@ -9,7 +9,7 @@ const LayoutDashboard = ({ children }: { children: ReactNode }) => {
       <Sidebar />
       <div className="flex-1 overflow-auto">
         <DashboardNavbar />
-        <main className="p-4 md:p-6 bg-background-secondary">
+        <main className="p-4 md:p-6 bg-background-secondary h-screen">
           {children}
           </main>
       </div>
