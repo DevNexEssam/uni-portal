@@ -54,7 +54,7 @@ const HeroSection = () => {
           <div className="mt-16 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div className="relative rounded-xl shadow-2xl overflow-hidden border-8 border-background bg-background transition-transform duration-500 hover:scale-[1.02]">
               <Image
-                src="/images/dashboard-screenshot.png"
+                src="/dashboard-screenshot.png"
                 alt="Academic Dashboard Preview"
                 width={1200}
                 height={800}

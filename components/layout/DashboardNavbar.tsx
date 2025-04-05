@@ -18,7 +18,7 @@ const DashboardNavbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md px-6 py-4">
+    <nav className="bg-background shadow-md px-6 py-4">
       <div className="flex items-center justify-between gap-4">
         {/* Page Title */}
         <h1 className="text-2xl font-bold text-gray-800"></h1>

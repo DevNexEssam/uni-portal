@@ -77,4 +77,5 @@ export interface Feature {
     uploadDate: string;
     dueDate: string;
     pdfUrl: string;
+    status: string;
   }
