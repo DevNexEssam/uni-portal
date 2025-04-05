@@ -59,3 +59,22 @@ export interface Feature {
     time: string;
   }
   
+
+  export interface CourseProps {
+    id: number;
+    name: string;
+    department: string;
+    instructor: string;
+    lecturesCount: number;
+    image: string;
+  }
+
+  export interface AssignmentProps {
+    id: string;
+    title: string;
+    course: string;
+    grade: string;
+    uploadDate: string;
+    dueDate: string;
+    pdfUrl: string;
+  }

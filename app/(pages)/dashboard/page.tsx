@@ -49,7 +49,7 @@ const page = () => {
         {/* Recently Uploaded Files */}
         <div className="border border-slate-200 rounded-lg p-4">
           <div className="flex items-center justify-between mb-4">
-            <span>Recently Uploaded Files</span>
+            <span className="text-text font-bold">Recently Uploaded Files</span>
             <span>
               <Link
                 href="/dashboard"
@@ -80,7 +80,7 @@ const page = () => {
         {/* Upcoming Schedule */}
         <div className="border border-slate-200 rounded-lg p-4">
           <div className="flex items-center justify-between mb-4">
-            <span>Upcoming Schedule</span>
+            <span className="text-text font-bold">Upcoming Schedule</span>
             <span>
               <Link
                 href="/dashboard"

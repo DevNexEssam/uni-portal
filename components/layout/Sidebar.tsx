@@ -11,23 +11,23 @@ import { IoNotificationsOutline, IoSettingsOutline } from "react-icons/io5";
 import Link from "next/link";
 
 const Links = [
-  { id: 0, label: "home", icon: <AiOutlineHome />, path: "/" },
-  { id: 1, label: "Courses", icon: <BiBookOpen />, path: "/courses" },
+  { id: 0, label: "home", icon: <AiOutlineHome />, path: "/dashboard" },
+  { id: 1, label: "Courses", icon: <BiBookOpen />, path: "/dashboard/courses" },
   {
     id: 2,
     label: "Assignments",
     icon: <MdOutlineAssignment />,
-    path: "/assignments",
+    path: "/dashboard/assignments",
   },
-  { id: 3, label: "Files", icon: <FiFileText />, path: "/files" },
-  { id: 4, label: "Schedule", icon: <CiCalendar />, path: "/schedule" },
+  { id: 3, label: "Files", icon: <FiFileText />, path: "/dashboard/files" },
+  { id: 4, label: "Schedule", icon: <CiCalendar />, path: "/dashboard/schedule" },
   {
     id: 5,
     label: "Notifications",
     icon: <IoNotificationsOutline />,
-    path: "/notifications",
+    path: "/dashboard/notifications",
   },
-  { id: 6, label: "Settings", icon: <IoSettingsOutline />, path: "/settings" },
+  { id: 6, label: "Settings", icon: <IoSettingsOutline />, path: "/dashboard/settings" },
 ];
 
 const Sidebar = () => {
