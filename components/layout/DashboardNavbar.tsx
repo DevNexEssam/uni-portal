@@ -1,14 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import { FiBell, FiLogOut, FiUser, FiSettings, FiChevronDown } from "react-icons/fi";
+import {
+  FiBell,
+  FiLogOut,
+  FiUser,
+  FiSettings,
+  FiChevronDown,
+} from "react-icons/fi";
 import Image from "next/image";
 
 const DashboardNavbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const user = {
-    name: "Ahmed Mohamed",
+    name: "User one",
     avatar: "/user.png",
-    role: "Student"
+    role: "Student",
   };
 
   return (
@@ -20,7 +26,7 @@ const DashboardNavbar = () => {
         {/* Right Section */}
         <div className="flex items-center gap-6">
           {/* Notification Button */}
-          <button 
+          <button
             aria-label="Notifications"
             className="relative p-2 text-text-secondary hover:bg-background-secondary rounded-full transition duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50"
           >
@@ -61,13 +67,17 @@ const DashboardNavbar = () => {
               )}
               <span className="font-medium text-text hidden md:inline-flex items-center gap-1">
                 {user.name}
-                <FiChevronDown className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                <FiChevronDown
+                  className={`transition-transform duration-200 ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                />
               </span>
             </button>
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div 
+              <div
                 className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-100"
                 onMouseLeave={() => setIsDropdownOpen(false)}
               >
@@ -75,7 +85,7 @@ const DashboardNavbar = () => {
                   <p className="text-sm font-medium text-text">{user.name}</p>
                   <p className="text-xs text-text-secondary">{user.role}</p>
                 </div>
-                
+
                 <a
                   href="/profile"
                   className="flex items-center px-4 py-2 text-sm text-text hover:bg-background-secondary transition duration-150"
@@ -83,7 +93,7 @@ const DashboardNavbar = () => {
                   <FiUser className="mr-2" />
                   Profile
                 </a>
-                
+
                 <a
                   href="/settings"
                   className="flex items-center px-4 py-2 text-sm text-text hover:bg-background-secondary transition duration-150"
@@ -91,7 +101,7 @@ const DashboardNavbar = () => {
                   <FiSettings className="mr-2" />
                   Settings
                 </a>
-                
+
                 <button
                   onClick={() => {
                     console.log("User logged out");

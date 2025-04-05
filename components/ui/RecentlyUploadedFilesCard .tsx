@@ -14,12 +14,12 @@ const RecentlyUploadedFilesCard = ({ fileName , course , date } : RecentlyUpload
               <FiFileText className="h-5 w-5" />
             </div>
             <div>
-              <p className="font-medium text-foreground">{fileName}</p>
-              <p className="text-xs text-foreground-secondary">{course}</p>
+              <p className="font-medium text-text">{fileName}</p>
+              <p className="text-xs text-text-secondary">{course}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-foreground-secondary">{date}</span>
+            <span className="text-xs text-text-secondary">{date}</span>
           </div>
         </div>
     </div>

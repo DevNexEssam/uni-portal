@@ -24,7 +24,7 @@ const CardComponent = ({
       {link && (
         <Link
           href={link}
-          className={`mt-2 inline-block text-xs ${colorClass} hover:underline font-medium`}
+          className={`mt-2 inline-block text-xs ${colorClass} hover:underline font-medium text-primary`}
         >
           View more
         </Link>

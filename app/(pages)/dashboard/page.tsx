@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import StartCard from "@/components/ui/StartCard";
 import Link from "next/link";
-import { FiFileText } from "react-icons/fi";
+import { FiCalendar, FiFileText } from "react-icons/fi";
 import RecentlyUploadedFilesCard from "../../../components/ui/RecentlyUploadedFilesCard ";
+import UpcomingScheduleCard from "../../../components/ui/UpcomingScheduleCard";
+import { MdOutlineTimelapse } from "react-icons/md";
 
 const page = () => {
   return (
@@ -18,25 +20,25 @@ const page = () => {
         <StartCard
           title="Total Courses"
           count={5}
-          icon={<FiFileText className="text-primary" />}
+          icon={<FiFileText />}
           iconClass="text-primary"
           colorClass="border-primary"
           link="/dashboard"
         />
         <StartCard
-          title="Total Courses"
+          title="Upcoming Deadlines"
           count={5}
-          icon={<FiFileText className="text-primary" />}
-          iconClass="text-primary"
-          colorClass="border-primary"
+          icon={<MdOutlineTimelapse />}
+          iconClass="text-warning"
+          colorClass="border-warning"
           link="/dashboard"
         />
         <StartCard
-          title="Total Courses"
+          title="Today's Schedule"
           count={5}
-          icon={<FiFileText className="text-primary" />}
-          iconClass="text-primary"
-          colorClass="border-primary"
+          icon={<FiCalendar />}
+          iconClass="text-green-400"
+          colorClass="border-green-400"
           link="/dashboard"
         />
       </div>
@@ -76,6 +78,36 @@ const page = () => {
           </div>
         </div>
         {/* Upcoming Schedule */}
+        <div className="border border-slate-200 rounded-lg p-4">
+          <div className="flex items-center justify-between mb-4">
+            <span>Upcoming Schedule</span>
+            <span>
+              <Link
+                href="/dashboard"
+                className="text-xs text-primary hover:underline font-medium"
+              >
+                View calendar
+              </Link>
+            </span>
+          </div>
+          <div className="flex flex-col gap-4">
+          <UpcomingScheduleCard
+          title="Algorithms Lecture"
+          course="Course 1"
+          time="2023-10-01 10:00 AM"
+          />
+          <UpcomingScheduleCard
+          title="Algorithms Lecture"
+          course="Course 1"
+          time="2023-10-01 10:00 AM"
+          />
+          <UpcomingScheduleCard
+          title="Algorithms Lecture"
+          course="Course 1"
+          time="2023-10-01 10:00 AM"
+          />
+          </div>
+        </div>
       </div>
     </div>
   );
