@@ -66,7 +66,8 @@ export interface Feature {
     department: string;
     instructor: string;
     lecturesCount: number;
-    image: string;
+    // image: string;
+    // progress: number;
   }
 
   export interface AssignmentProps {

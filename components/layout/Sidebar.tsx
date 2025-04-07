@@ -9,6 +9,7 @@ import { FiFileText } from "react-icons/fi";
 import { CiCalendar } from "react-icons/ci";
 import { IoNotificationsOutline, IoSettingsOutline } from "react-icons/io5";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Links = [
   { id: 0, label: "home", icon: <AiOutlineHome />, path: "/dashboard" },
@@ -31,6 +32,9 @@ const Links = [
 ];
 
 const Sidebar = () => {
+  const pathName = usePathname()
+  console.log(pathName)
+  
   const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
@@ -81,7 +85,7 @@ const Sidebar = () => {
                 title={item.label}
                 className={`flex items-center space-x-2 p-2 hover:bg-primary-light rounded-md transition-all duration-300 ease-in-out ${
                   isExpanded ? "justify-start" : "justify-center"
-                }`}
+                } ${pathName === item.path ? "bg-primary-light" : ""} `}
               >
                 <span className="text-white text-lg">{item.icon}</span>
                 {isExpanded && (
