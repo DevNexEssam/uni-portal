@@ -1,7 +1,6 @@
-/* eslint-disable react/no-unescaped-entities */
-import Image from 'next/image';
-import Link from 'next/link';
-import { FaPlay, FaArrowRight } from 'react-icons/fa';
+import Image from "next/image";
+import Link from "next/link";
+import { FaPlay, FaArrowRight } from "react-icons/fa";
 
 const HeroSection = () => {
   return (
@@ -17,9 +16,13 @@ const HeroSection = () => {
           <h1 className="text-5xl md:text-6xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-dark">
             Transform Your <br className="hidden md:block" /> Academic Journey
           </h1>
-          
+
           <p className="mt-6 text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto">
-            The intelligent dashboard that helps students <span className="font-semibold text-primary">organize</span>, <span className="font-semibold text-primary-dark">track</span>, and <span className="font-semibold text-primary">excel</span> in their studies.
+            The intelligent dashboard that helps students{" "}
+            <span className="font-semibold text-primary">organize</span>,{" "}
+            <span className="font-semibold text-primary-dark">track</span>, and{" "}
+            <span className="font-semibold text-primary">excel</span> in their
+            studies.
           </p>
 
           {/* Enhanced Buttons */}
@@ -39,13 +42,12 @@ const HeroSection = () => {
 
             {/* Secondary Button */}
             <Link
-              href="/demo"
+              href="/dashboard"
               className="relative flex items-center justify-center px-8 py-4 border-2 border-primary text-primary bg-transparent rounded-xl hover:bg-primary/5 transition-all duration-300 group overflow-hidden"
             >
               <span className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               <span className="relative z-10 flex items-center font-medium text-lg">
-                <FaPlay className="mr-3 text-primary group-hover:text-primary-dark transition-colors duration-300" />
-                Watch Demo
+                Access Dashboard
               </span>
             </Link>
           </div>

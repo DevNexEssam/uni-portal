@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import StartCard from "@/components/ui/StartCard";
+import StartCard from "../../../components/ui/StartCard";
 import Link from "next/link";
 import { FiCalendar, FiFileText } from "react-icons/fi";
 import RecentlyUploadedFilesCard from "../../../components/ui/RecentlyUploadedFilesCard ";

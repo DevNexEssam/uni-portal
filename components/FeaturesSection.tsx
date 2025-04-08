@@ -3,12 +3,6 @@ import { Feature } from '../types';
 import { FaBook, FaCalendarAlt, FaChartLine, FaClipboardList, FaUsers} from 'react-icons/fa';
 import { 
   FaFileAlt, 
-  FaFlask, 
-  FaLanguage, 
-  FaProjectDiagram, 
-  FaBalanceScale, 
-  FaVideo, 
-  FaBell 
 } from 'react-icons/fa';
 
 const features: Feature[] = [

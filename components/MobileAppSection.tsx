@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { FaMobileAlt, FaCheckCircle } from 'react-icons/fa';
 
 const MobileAppSection = () => {
