@@ -29,12 +29,12 @@ const HeroSection = () => {
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
             {/* Primary Button */}
             <Link
-              href="/signup"
+              href="/documentation"
               className="relative flex items-center justify-center px-8 py-4 bg-primary text-background rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-primary to-primary-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               <span className="relative z-10 flex items-center font-medium text-lg">
-                Get Started Free
+              View Documentation
                 <FaArrowRight className="ml-3 transition-transform group-hover:translate-x-1 duration-200" />
               </span>
               <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>

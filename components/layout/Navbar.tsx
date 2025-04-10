@@ -34,7 +34,7 @@ const Navbar = () => {
             href="/login"
             className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-200"
           >
-            Sign Up Free
+            Sign In
           </Link>
         </div>
       </div>

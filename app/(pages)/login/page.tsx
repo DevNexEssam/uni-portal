@@ -1,7 +1,7 @@
 // 'use client';
 import Link from "next/link";
 import { GiBookmarklet } from "react-icons/gi";
-import LoginForm from "../../../components/layout/LoginForm";
+import LoginForm from "../../../components/ui/LoginForm";
 
 export default function LoginPage() {
   return (

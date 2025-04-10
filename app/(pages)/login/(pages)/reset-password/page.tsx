@@ -1,12 +1,12 @@
-import React from 'react'
-import ResetPasswordForm from '../../../../../components/layout/ResetPasswordForm'
+import React from "react";
+import ResetPasswordForm from "../../../../../components/ui/ResetPasswordForm";
 
 const page = () => {
   return (
     <div>
-        <ResetPasswordForm/>
+      <ResetPasswordForm />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
