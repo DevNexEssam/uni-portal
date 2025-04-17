@@ -12,8 +12,8 @@ const SignUpForm = () => {
     email: "",
     password: "",
   });
-
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,7 +31,12 @@ const SignUpForm = () => {
 
     try {
       await axios.post("/api/register", student);
-      router.push("/login");
+      setSuccess("Registration successful! Redirecting to login...");
+      setTimeout(() => {
+        setSuccess("");
+      }
+      , 4000);
+      // await router.push("/login");
     } catch (err: any) {
       setError(err?.response?.data?.message || "Registration failed");
     }
@@ -40,6 +45,8 @@ const SignUpForm = () => {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Success Message */}
+        {success && <p className="text-green-500 text-sm mt-1">{success}</p>}
         {/* Full Name */}
         <div>
           <label htmlFor="fullname" className="block text-sm font-medium text-text mb-1">

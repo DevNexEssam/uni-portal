@@ -1,13 +1,40 @@
+"use client";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa";
 
 const LoginForm = () => {
+  const [email , setEmail] = useState("")
+  const [password , setPassword] = useState("")
+  const router = useRouter()
+  const [error , setError] = useState("")
+
+  const handelSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError("")
+    if (!email || !password) {
+      setError("Please fill all fields")
+      return
+    }
+    const res = await signIn("credentials" , {
+      email,
+      password,
+      redirect: false,
+    });
+    if (res?.error) {
+      setError("Invalid credentials")
+    } else {
+      router.push("/dashboard")
+    }
+
+  }
   return (
     <>
       {/* Login Form */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="space-y-4">
+        <form onSubmit={handelSubmit} className="space-y-4">
           {/* Username Field */}
           <div>
             <label
@@ -25,8 +52,14 @@ const LoginForm = () => {
                 id="username"
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
                 placeholder="Enter your university ID"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
+            {error && (
+              <p className="text-red-500 text-sm mt-1">{error}</p>
+            )}
           </div>
 
           {/* Password Field */}
@@ -46,17 +79,23 @@ const LoginForm = () => {
                 id="password"
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
                 placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
+            {error && (
+              <p className="text-red-500 text-sm mt-1">{error}</p>
+            )}
           </div>
 
           {/* Login Button */}
           <div className="pt-2">
-            <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+            <button type="submit" className="w-full flex justify-center py-2 px-4 cursor-pointer border border-transparent rounded-lg shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
               Login
             </button>
           </div>
-        </div>
+        </form>
       </div>
 
       {/* Footer Links */}
