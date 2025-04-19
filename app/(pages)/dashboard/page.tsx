@@ -6,7 +6,7 @@ import RecentlyUploadedFilesCard from "../../../components/ui/RecentlyUploadedFi
 import UpcomingScheduleCard from "../../../components/ui/UpcomingScheduleCard";
 import { MdOutlineTimelapse } from "react-icons/md";
 
-const page = () => {
+const DashboardPage = async () => {
   return (
     <div className="text-black">
       <div>
@@ -113,4 +113,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default DashboardPage;

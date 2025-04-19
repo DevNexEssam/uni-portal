@@ -1,8 +1,16 @@
 import { ReactNode } from "react";
 import Sidebar from "../../../components/layout/Sidebar";
 import DashboardNavbar from "../../../components/layout/DashboardNavbar";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "../../../lib/auth";
 
-const LayoutDashboard = ({ children }: { children: ReactNode }) => {
+const LayoutDashboard = async ({ children }: { children: ReactNode }) => {
+  const session = await getServerSession(authOptions)
+
+  if (!session) {
+    redirect("/login");
+  }
   return (
     <div className="flex h-screen">
       {/* sidebar */}

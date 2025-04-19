@@ -4,22 +4,26 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa";
+import Loading from "./loading";
 
 const LoginForm = () => {
-  const [email , setEmail] = useState("")
+  const [academicId , setAcademicId] = useState("")
   const [password , setPassword] = useState("")
   const router = useRouter()
   const [error , setError] = useState("")
+  const [loading , setLoading] = useState(false)
 
   const handelSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setLoading(true)
     setError("")
-    if (!email || !password) {
+    if (!academicId || !password) {
       setError("Please fill all fields")
+      setLoading(false);
       return
     }
     const res = await signIn("credentials" , {
-      email,
+      academicId,
       password,
       redirect: false,
     });
@@ -28,6 +32,7 @@ const LoginForm = () => {
     } else {
       router.push("/dashboard")
     }
+    setLoading(false)
 
   }
   return (
@@ -41,7 +46,7 @@ const LoginForm = () => {
               htmlFor="username"
               className="block text-sm font-medium text-text mb-1"
             >
-              University ID
+              Academic ID
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -52,8 +57,8 @@ const LoginForm = () => {
                 id="username"
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
                 placeholder="Enter your university ID"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={academicId}
+                onChange={(e) => setAcademicId(e.target.value)}
                 required
               />
             </div>
@@ -91,9 +96,16 @@ const LoginForm = () => {
 
           {/* Login Button */}
           <div className="pt-2">
-            <button type="submit" className="w-full flex justify-center py-2 px-4 cursor-pointer border border-transparent rounded-lg shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+            {loading ? (
+              <div className="flex justify-center mt-2">
+                <Loading />
+              </div>
+            ) : (
+              <button type="submit" className="w-full flex justify-center py-2 px-4 cursor-pointer border border-transparent rounded-lg shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+            
               Login
-            </button>
+                </button>
+            )}
           </div>
         </form>
       </div>
