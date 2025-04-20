@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
-import StartCard from "../../../components/ui/StartCard";
+import StartCard from "@/components/ui/StartCard";
 import Link from "next/link";
 import { FiCalendar, FiFileText } from "react-icons/fi";
-import RecentlyUploadedFilesCard from "../../../components/ui/RecentlyUploadedFilesCard ";
-import UpcomingScheduleCard from "../../../components/ui/UpcomingScheduleCard";
+import RecentlyUploadedFilesCard from "@/components/ui/RecentlyUploadedFilesCard ";
+import UpcomingScheduleCard from "@/components/ui/UpcomingScheduleCard";
 import { MdOutlineTimelapse } from "react-icons/md";
 
 const DashboardPage = async () => {
@@ -42,7 +42,6 @@ const DashboardPage = async () => {
           link="/dashboard"
         />
       </div>
-
 
       {/* bottom */}
       <div className="grid grid-cols-2 gap-5 mt-5">
@@ -91,21 +90,21 @@ const DashboardPage = async () => {
             </span>
           </div>
           <div className="flex flex-col gap-4">
-          <UpcomingScheduleCard
-          title="Algorithms Lecture"
-          course="Course 1"
-          time="2023-10-01 10:00 AM"
-          />
-          <UpcomingScheduleCard
-          title="Algorithms Lecture"
-          course="Course 1"
-          time="2023-10-01 10:00 AM"
-          />
-          <UpcomingScheduleCard
-          title="Algorithms Lecture"
-          course="Course 1"
-          time="2023-10-01 10:00 AM"
-          />
+            <UpcomingScheduleCard
+              title="Algorithms Lecture"
+              course="Course 1"
+              time="2023-10-01 10:00 AM"
+            />
+            <UpcomingScheduleCard
+              title="Algorithms Lecture"
+              course="Course 1"
+              time="2023-10-01 10:00 AM"
+            />
+            <UpcomingScheduleCard
+              title="Algorithms Lecture"
+              course="Course 1"
+              time="2023-10-01 10:00 AM"
+            />
           </div>
         </div>
       </div>

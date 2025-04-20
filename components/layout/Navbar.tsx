@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { GiBookmarklet } from "react-icons/gi";
-import { authOptions } from "../../lib/auth";
+import { studentAuthOptions } from "@/lib/studentAuthOptions";
 import { getServerSession } from "next-auth";
 
 const Navbar = async () => {
@@ -11,7 +11,7 @@ const Navbar = async () => {
     { id: "faq", label: "FAQ" },
   ];
 
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(studentAuthOptions);
 
   return (
     <nav className="bg-background shadow-sm py-6 px-6 z-50 sticky top-0">
@@ -36,14 +36,14 @@ const Navbar = async () => {
         <div>
           {session ? (
             <Link
-              href="/dashboard"
+              href="/student/dashboard"
               className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-200"
             >
               Dashboard
             </Link>
           ) : (
             <Link
-              href="/login"
+              href="/student/login"
               className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-200"
             >
               Sign In

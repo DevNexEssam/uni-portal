@@ -4,6 +4,7 @@ export interface IUser extends Document {
     name: string;
     academicId: string;
     password: string;
+    role: string;
 } 
 
 export const UserSchema = new Schema<IUser> ({
@@ -20,6 +21,11 @@ export const UserSchema = new Schema<IUser> ({
         type: String,
         required: true,
     },
+    role: {
+        type: String,
+        enum: ["student"],
+        default: "student",
+    }
 }, {
     timestamps: true,
     versionKey: false,

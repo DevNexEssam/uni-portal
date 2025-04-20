@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaLock, FaUser, FaEnvelope } from "react-icons/fa";
 import { GiBookmarklet } from "react-icons/gi";
-import Loading from "./loading";
+import Loading from "@/components/ui/loading";
 
 const SignUpForm = () => {
   const [student, setStudent] = useState({
@@ -35,7 +35,7 @@ const SignUpForm = () => {
     }
 
     try {
-      await axios.post("/api/register", student);
+      await axios.post("/api/student/new", student);
       setSuccess("      Registration successful! Redirecting to login...");
       setTimeout(() => {
         setSuccess("");

@@ -5,7 +5,7 @@ import bctypt from "bcryptjs";
 import { connectDB } from "./mongodb";
 import { User } from "../models/user";
 
-export const authOptions: NextAuthOptions = {
+export const studentAuthOptions: NextAuthOptions = {
         providers : [
             CredentialsProvider({
                 name : "Credentials",
@@ -23,7 +23,7 @@ export const authOptions: NextAuthOptions = {
                     if(!isCorrect) {
                         throw new Error("Password is incorrect")
                     }
-                    return {id : user._id, academicId : user.academicId, name : user.name}
+                    return {id : user._id, academicId : user.academicId, name : user.name , role : user.role}
                 }
             })
         ]
@@ -34,4 +34,18 @@ export const authOptions: NextAuthOptions = {
             strategy : "jwt"
         },
         secret : process.env.NEXTAUTH_SECRET,
+        callbacks: {
+            async jwt({ token, user }) {
+              if (user) {
+                token.role = user.role;
+              }
+              return token;
+            },
+            async session({ session, token }) {
+              if (token && session.user) {
+                session.user.role = token.role as string;
+              }
+              return session;
+            },
+          }
 }

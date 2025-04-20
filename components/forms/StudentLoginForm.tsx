@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa";
-import Loading from "./loading";
+import Loading from "../ui/loading";
 
 const LoginForm = () => {
   const [academicId , setAcademicId] = useState("")
@@ -30,7 +30,7 @@ const LoginForm = () => {
     if (res?.error) {
       setError("Invalid credentials")
     } else {
-      router.push("/dashboard")
+      router.push("/student/dashboard")
     }
     setLoading(false)
 
