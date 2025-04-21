@@ -4,16 +4,16 @@ import { Student } from "@/models/student"
 import bcrypt from "bcryptjs"
 
 export async function POST (req : Request) {
-    const {name, academicId, password , role} = await req.json()
+    const {name, academicId, password, faculty, department, academicLevel , phone , role} = await req.json()
     await connectDB()
 
-    const userExist = await Student.findOne({academicId})
-    if(userExist) return NextResponse.json(({message: "Student already exists"}), {status: 400})
+    const studentExist = await Student.findOne({academicId})
+    if(studentExist) return NextResponse.json(({message: "Student already exists"}), {status: 400})
 
     const hashedPassword = await bcrypt.hash(password , 10)
 
-    const newUser = new Student({name, academicId, password: hashedPassword , role})
-    await newUser.save()
+    const newStudent = new Student({name, academicId, password: hashedPassword , faculty, department , academicLevel, phone , role})
+    await newStudent.save()
 
     return NextResponse.json({ message: "Student registered successfully" }, { status: 201 });
 }

@@ -7,6 +7,8 @@ export interface IUser extends Document {
     role: string;
     faculty: string;
     department: string;
+    academicLevel: string;
+    phone : string;
 } 
 
 export const UserSchema = new Schema<IUser> ({
@@ -28,6 +30,14 @@ export const UserSchema = new Schema<IUser> ({
         required: true,
     },
     department: {
+        type: String,
+        required: true,
+    },
+    academicLevel : {
+        type: String,
+        required: true,
+    },
+    phone : {
         type: String,
         required: true,
     },
