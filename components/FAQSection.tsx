@@ -3,19 +3,19 @@ import { FAQItem } from "../types";
 
 const faqs: FAQItem[] = [
   {
-    question: "Is UniFlow really free?",
+    question: "Is UniPortal really free?",
     answer: "Yes! Our core features are completely free for students.",
   },
   {
-    question: "Is UniFlow really free?",
+    question: "Is UniPortal really free?",
     answer: "Yes! Our core features are completely free for students.",
   },
   {
-    question: "Is UniFlow really free?",
+    question: "Is UniPortal really free?",
     answer: "Yes! Our core features are completely free for students.",
   },
   {
-    question: "Is UniFlow really free?",
+    question: "Is UniPortal really free?",
     answer: "Yes! Our core features are completely free for students.",
   },
 ];
@@ -29,7 +29,7 @@ const FAQSection = () => {
             Frequently Asked Questions
           </h2>
           <p className="mt-4 text-xl text-text-secondary">
-            Everything you need to know about UniFlow.
+            Everything you need to know about UniPortal.
           </p>
         </div>
         <div className="mt-12 space-y-6">

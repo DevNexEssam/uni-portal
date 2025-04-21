@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "UniFlow",
+  title: "UniPortal",
   description:
     "A dedicated academic platform for [College Name] students, enabling them to manage study materials, upload files, and track tasks efficiently.",
 };

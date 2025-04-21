@@ -4,7 +4,7 @@ import { Testimonial } from "../types";
 const testimonials: Testimonial[] = [
   {
     quote:
-      "UniFlow cut my study time in half while improving my grades. The smart scheduling is a game-changer!",
+      "UniPortal cut my study time in half while improving my grades. The smart scheduling is a game-changer!",
     name: "Emily R.",
     role: "Computer Science Major",
     rating: 5,

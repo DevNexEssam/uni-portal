@@ -1,7 +1,7 @@
+// app/api/admin/auth/[...nextauth]/route.ts
 import NextAuth from "next-auth";
-import { studentAuthOptions } from "@/lib/studentAuthOptions";
+import { authOptions } from "@/lib/authOptions";
 
-
-const handler = NextAuth(studentAuthOptions) 
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

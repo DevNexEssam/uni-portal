@@ -32,7 +32,7 @@ const AdminLoginPage = () => {
         <div className="mt-6 text-center">
           <p className="text-xs text-gray-500 flex items-center justify-center gap-1">
             <FaBook className="text-gray-400" />
-            <span>© {new Date().getFullYear()} UniFlow Admin System</span>
+            <span>© {new Date().getFullYear()} UniPortal Admin System</span>
           </p>
         </div>
       </div>

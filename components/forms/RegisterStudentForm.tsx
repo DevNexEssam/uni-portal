@@ -154,7 +154,7 @@ const SignUpForm = () => {
         >
           <GiBookmarklet className="text-primary text-3xl" />
           <div className="text-left">
-            <h1 className="font-bold text-xl text-text">UniFlow</h1>
+            <h1 className="font-bold text-xl text-text">UniPortal</h1>
             <p className="text-sm text-text-secondary">
               Faculty of Computer Science
             </p>

@@ -22,7 +22,7 @@ const LoginForm = () => {
       setLoading(false);
       return
     }
-    const res = await signIn("credentials" , {
+    const res = await signIn("student-credentials" , {
       academicId,
       password,
       redirect: false,
