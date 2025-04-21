@@ -5,6 +5,8 @@ export interface IUser extends Document {
     academicId: string;
     password: string;
     role: string;
+    faculty: string;
+    department: string;
 } 
 
 export const UserSchema = new Schema<IUser> ({
@@ -21,6 +23,14 @@ export const UserSchema = new Schema<IUser> ({
         type: String,
         required: true,
     },
+    faculty : {
+        type: String,
+        required: true,
+    },
+    department: {
+        type: String,
+        required: true,
+    },
     role: {
         type: String,
         enum: ["student"],
@@ -31,4 +41,4 @@ export const UserSchema = new Schema<IUser> ({
     versionKey: false,
 })
 
-export const User = mongoose.models.User || mongoose.model('User', UserSchema);
+export const Student = mongoose.models.Student || mongoose.model('Student', UserSchema);

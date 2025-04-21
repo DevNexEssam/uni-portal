@@ -17,7 +17,7 @@ export default function StudentsPage() {
           Students Management
         </h1>
         <Link 
-          href="/admin/students/add"
+          href="/admin/dashboard/students/add-student"
           className="flex items-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark"
         >
           <FaPlus className="mr-2" />

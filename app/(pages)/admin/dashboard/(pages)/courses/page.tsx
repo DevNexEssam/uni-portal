@@ -17,7 +17,7 @@ export default function CoursesPage() {
           Courses Management
         </h1>
         <Link 
-          href="/admin/courses/add"
+          href="/admin/dashboard/courses/add-course"
           className="flex items-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark"
         >
           <FaPlus className="mr-2" />

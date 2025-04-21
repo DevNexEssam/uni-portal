@@ -2,8 +2,8 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { connectDB } from "./mongodb";
-import { User } from "../models/user";
-import { Admin } from "../models/admin";
+import { Admin } from "@/models/admin";
+import { Student } from "@/models/student";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -16,20 +16,20 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         await connectDB();
-        const user = await User.findOne({ academicId: credentials?.academicId });
-        if (!user) {
+        const student = await Student.findOne({ academicId: credentials?.academicId });
+        if (!student) {
           throw new Error("No student found with this Academic ID");
         }
 
-        const isCorrect = await bcrypt.compare(credentials!.password, user.password);
+        const isCorrect = await bcrypt.compare(credentials!.password, student.password);
         if (!isCorrect) {
           throw new Error("Password is incorrect");
         }
 
         return {
-          id: user._id.toString(),
-          name: user.name,
-          academicId: user.academicId,
+          id: student._id.toString(),
+          name: student.name,
+          academicId: student.academicId,
           role: "student",
         };
       },

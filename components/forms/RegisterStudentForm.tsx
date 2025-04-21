@@ -36,7 +36,7 @@ const SignUpForm = () => {
 
     try {
       await axios.post("/api/student/new", student);
-      setSuccess("      Registration successful! Redirecting to login...");
+      setSuccess("Registration successful! Redirecting to login...");
       setTimeout(() => {
         setSuccess("");
         router.push("/login");
