@@ -8,6 +8,7 @@ export interface IUser extends Document {
     faculty: string;
     department: string;
     academicLevel: string;
+    coursers: string[];
     phone : string;
 } 
 
@@ -37,6 +38,7 @@ export const UserSchema = new Schema<IUser> ({
         type: String,
         required: true,
     },
+    coursers : [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
     phone : {
         type: String,
         required: true,

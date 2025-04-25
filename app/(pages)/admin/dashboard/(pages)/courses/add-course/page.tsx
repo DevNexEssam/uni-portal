@@ -1,11 +1,13 @@
 'use client';
-import { FaBook, FaHashtag, FaChalkboardTeacher, FaUsers, FaSave } from 'react-icons/fa';
+import { FaBook, FaHashtag, FaChalkboardTeacher, FaSave } from 'react-icons/fa';
 import Link from 'next/link';
 
 export default function AddCoursePage() {
   const departments = ['Computer Science', 'Information Systems', 'AI', 'Computer Engineering'];
   const instructors = ['Dr. Ahmed Mohamed', 'Dr. Salma Mostafa', 'Dr. Hossam Refaat'];
-  const creditHours = [1, 2, 3, 4];
+  const faculty = ["Faculty of Engineering", "Faculty of Computer Science"];
+  const academicLevels = ["1st Year", "2st Year", "3st Year", "4st Year"];
+
 
   return (
       <>
@@ -89,33 +91,42 @@ export default function AddCoursePage() {
             </div>
           </div>
 
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Credit Hours */}
+            {/* Department */}
             <div>
               <label className="block text-sm font-medium text-text mb-1">
-                Credit Hours
+                faculty
               </label>
-              <select className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
-                {creditHours.map((hours, i) => (
-                  <option key={i} value={hours}>{hours} {hours > 1 ? 'hours' : 'hour'}</option>
+              <select
+                className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+                required
+              >
+                <option value="">Select faculty</option>
+                {faculty.map((dept, i) => (
+                  <option key={i} value={dept}>{dept}</option>
                 ))}
               </select>
             </div>
 
-            {/* Max Students */}
+            {/* Instructor */}
             <div>
               <label className="text-sm font-medium text-text mb-1 flex items-center">
-                <FaUsers className="mr-2 text-primary" />
-                Maximum Students
+                <FaChalkboardTeacher className="mr-2 text-primary" />
+                academic Level
               </label>
-              <input
-                type="number"
-                min="1"
+              <select
                 className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-                placeholder="50"
-              />
+                required
+              >
+                <option value="">Select academic Level</option>
+                {academicLevels.map((instructor, i) => (
+                  <option key={i} value={instructor}>{instructor}</option>
+                ))}
+              </select>
             </div>
           </div>
+
 
           {/* Course Description */}
           <div>
