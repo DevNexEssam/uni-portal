@@ -6,6 +6,8 @@ export interface Icourse extends Document {
     department: string;
     instructor: string;
     description: string;
+    faculty: string;
+    academicLevel: string;
 }
 
 export const courseSchema = new Schema<Icourse> ({
@@ -23,6 +25,14 @@ export const courseSchema = new Schema<Icourse> ({
         required: true,
     },
     instructor: {
+        type: String,
+        required: true,
+    },
+    faculty : {
+        type: String,
+        required: true,
+    },
+    academicLevel : {
         type: String,
         required: true,
     },
