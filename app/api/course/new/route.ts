@@ -30,9 +30,7 @@ export async function POST(req: Request) {
         academicLevel,
         role: 'student'
       });
-  
-      console.log(`Found ${students.length} students matching the criteria`);
-  
+      
       const updatePromises = students.map(async (student) => {
         try {
           if (!student.courses.some(c => c.equals(course._id))) {

@@ -2,16 +2,19 @@ import { ReactNode } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import DashboardNavbar from "@/components/layout/DashboardNavbar";
 import { getServerSession } from "next-auth";
-import { studentAuthOptions } from "@/lib/studentAuthOptions";
+// import { studentAuthOptions } from "@/lib/studentAuthOptions";
 import { redirect } from "next/navigation";
+import { Providers } from "@/components/ui/providers";
+import { authOptions } from "@/lib/authOptions";
 
 const LayoutDashboard = async ({ children }: { children: ReactNode }) => {
-  const session = await getServerSession(studentAuthOptions);
+  const session = await getServerSession(authOptions);
 
   if (session?.user?.role !== "student") {
     redirect("/student/login");
   }
   return (
+    <Providers>
     <div className="flex h-screen">
       {/* sidebar */}
       <Sidebar />
@@ -20,6 +23,7 @@ const LayoutDashboard = async ({ children }: { children: ReactNode }) => {
         <main className="p-4 md:p-6 bg-background-secondary">{children}</main>
       </div>
     </div>
+    </Providers>
   );
 };
 

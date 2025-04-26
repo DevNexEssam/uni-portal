@@ -1,179 +1,253 @@
 "use client";
-import axios from "axios";
+import React from 'react'
+import {
+  FaUser,
+  FaIdCard,
+  FaGraduationCap,
+  FaUniversity,
+  FaCalendarAlt,
+  FaSave,
+} from "react-icons/fa";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { FaLock, FaUser, FaEnvelope } from "react-icons/fa";
-import { GiBookmarklet } from "react-icons/gi";
-import Loading from "@/components/ui/loading";
+import { useState } from "react";
+import axios from "axios";
 
-const SignUpForm = () => {
-  const [student, setStudent] = useState({
-    name: "",
-    academicId: "",
-    password: "",
-  });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-
-    if (!student.name || !student.academicId || !student.password) {
-      setError("Please fill all the fields");
-      setLoading(false);
-      return;
-    }
-
-    if (student.password.length < 6) {
-      setError("Password must be at least 6 characters");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      await axios.post("/api/student/new", student);
-      setSuccess("Registration successful! Redirecting to login...");
-      setTimeout(() => {
-        setSuccess("");
-        router.push("/login");
-      }, 4000);
-      // await router.push("/login");
+const RegisterStudentForm = () => {
+    const departments = ["Data Science", "Software Engineering", "Cybersecurity"];
+    const faculties = ["Faculty of Engineering", "Faculty of Computer Science"];
+    const academicLevels = ["1st Year", "2st Year", "3st Year", "4st Year"];
+  
+    const [student, setStudent] = useState({
+      name: "",
+      academicId: "",
+      password: "",
+      faculty: "",
+      department: "",
+      academicLevel: "",
+      phone: "",
+    });
+  
+    const [error, setError] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
+  
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setLoading(true);
       setError("");
-    } catch (err: any) {
-      setError(err?.response?.data?.message || "Registration failed");
-    }
-    setLoading(false);
-  };
-
+  
+      if (
+        !student.name ||
+        !student.academicId ||
+        !student.faculty ||
+        !student.department
+      ) {
+        setError("Please fill in all required fields.");
+        setLoading(false);
+      }
+      try {
+        await axios.post("/api/student/new", student);
+        setSuccess("Student added successfully!");
+        setTimeout(() => {
+          setSuccess("");
+          setStudent({
+            name: "",
+            academicId: "",
+            password: "",
+            faculty: "",
+            department: "",
+            academicLevel: "",
+            phone: "",
+          })
+        }, 4000);
+        setError("");
+      } catch (err: any) {
+        setErrorMessage(err?.response?.data?.message || "Failed to add student check your data and try again.");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 4000);
+      }
+      setLoading(false);
+    };
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Success Message */}
-        {success && <p className="text-green-500 text-sm mt-1">{success}</p>}
+    {success && <p className="text-green-500 text-sm mt-1">{success}</p>}
+    {errorMessage && (
+      <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
+    )}
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* University ID */}
+        <div>
+          <label className="text-sm font-medium text-text mb-1 flex items-center">
+            <FaIdCard className="mr-2 text-primary" />
+            University ID (Required)
+          </label>
+          <input
+            type="text"
+            className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+            placeholder="123456789"
+            required
+            value={student.academicId}
+            onChange={(e) =>
+              setStudent({ ...student, academicId: e.target.value })
+            }
+          />
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+        </div>
+
         {/* Full Name */}
         <div>
-          <label
-            htmlFor="fullname"
-            className="block text-sm font-medium text-text mb-1"
-          >
-            Full Name
+          <label className="text-sm font-medium text-text mb-1 flex items-center">
+            <FaUser className="mr-2 text-primary" />
+            Full Name (Required)
           </label>
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaUser className="text-gray-400" />
-            </span>
-            <input
-              type="text"
-              id="fullname"
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-              placeholder="Enter your full name"
-              value={student.name}
-              onChange={(e) => setStudent({ ...student, name: e.target.value })}
-            />
-          </div>
+          <input
+            type="text"
+            className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+            placeholder="Ahmed Mohamed"
+            required
+            value={student.name}
+            onChange={(e) =>
+              setStudent({ ...student, name: e.target.value })
+            }
+          />
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
         </div>
+      </div>
 
-        {/* academicId */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Department */}
         <div>
-          <label
-            htmlFor="academicId"
-            className="block text-sm font-medium text-text mb-1"
-          >
-            Academic Id
+          <label className="text-sm font-medium text-text mb-1 flex items-center">
+            <FaGraduationCap className="mr-2 text-primary" />
+            Department (Required)
           </label>
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaEnvelope className="text-gray-400" />
-            </span>
-            <input
-              type="text"
-              id="academicId"
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-              placeholder="Enter your university Academic Id"
-              value={student.academicId}
-              onChange={(e) =>
-                setStudent({ ...student, academicId: e.target.value })
-              }
-            />
-          </div>
+          <select
+            className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+            required
+            value={student.department}
+            onChange={(e) =>
+              setStudent({ ...student, department: e.target.value })
+            }
+          >
+            <option value="">Select Department</option>
+            {departments.map((dept, i) => (
+              <option key={i} value={dept}>
+                {dept}
+              </option>
+            ))}
+          </select>
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
         </div>
 
-        {/* Password */}
+        {/* Faculty */}
         <div>
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-text mb-1"
-          >
-            Password
+          <label className="text-sm font-medium text-text mb-1 flex items-center">
+            <FaUniversity className="mr-2 text-primary" />
+            Faculty (Required)
           </label>
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaLock className="text-gray-400" />
-            </span>
-            <input
-              type="password"
-              id="password"
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-              placeholder="Create a password (min 6 characters)"
-              value={student.password}
-              onChange={(e) =>
-                setStudent({ ...student, password: e.target.value })
-              }
-            />
-          </div>
-          <p className="mt-1 text-xs text-text-secondary">
-            Password must be at least 6 characters long
-          </p>
+          <select
+            className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+            required
+            value={student.faculty}
+            onChange={(e) =>
+              setStudent({ ...student, faculty: e.target.value })
+            }
+          >
+            <option value="">Select Faculty</option>
+            {faculties.map((faculty, i) => (
+              <option key={i} value={faculty}>
+                {faculty}
+              </option>
+            ))}
+          </select>
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Academic Level */}
+        <div>
+          <label className="text-sm font-medium text-text mb-1 flex items-center">
+            <FaCalendarAlt className="mr-2 text-primary" />
+            Academic Level
+          </label>
+          <select
+            className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+            value={student.academicLevel}
+            onChange={(e) =>
+              setStudent({ ...student, academicLevel: e.target.value })
+            }
+          >
+            <option value="">Select Level</option>
+            {academicLevels.map((level, i) => (
+              <option key={i} value={level}>
+                {level}
+              </option>
+            ))}
+          </select>
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
         </div>
 
-        {/* Error Message */}
-        {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+        {/* Phone */}
+        <div>
+          <label className="block text-sm font-medium text-text mb-1">
+            Phone Number
+          </label>
+          <input
+            type="tel"
+            className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+            placeholder="+20 123 456 7890"
+            value={student.phone}
+            onChange={(e) =>
+              setStudent({ ...student, phone: e.target.value })
+            }
+          />
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Password */}
+        <div>
+          <label className="text-sm font-medium text-text mb-1 flex items-center">
+            <FaIdCard className="mr-2 text-primary" />
+            Password (Required)
+          </label>
+          <input
+            type="password"
+            className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+            placeholder="********"
+            required
+            value={student.password}
+            onChange={(e) =>
+              setStudent({ ...student, password: e.target.value })
+            }
+          />
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+        </div>
+      </div>
 
-        {/* Submit Button */}
-        {loading ? (
-          <div className="flex justify-center mt-2">
-            <Loading />
-          </div>
-        ) : (
-          <button
-            type="submit"
-            className="w-full flex justify-center py-2 px-4 border cursor-pointer border-transparent rounded-lg shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-          >
-            Create Account
-          </button>
-        )}
-
-        {/* Logo */}
+      <div className="flex justify-end space-x-4 pt-4">
         <Link
-          href="/"
-          className="flex items-center justify-center space-x-2 mb-4 w-max mx-auto"
+          href="/admin/students"
+          className="px-4 py-2 border border-gray-300 rounded-lg text-text hover:bg-background-secondary"
         >
-          <GiBookmarklet className="text-primary text-3xl" />
-          <div className="text-left">
-            <h1 className="font-bold text-xl text-text">UniPortal</h1>
-            <p className="text-sm text-text-secondary">
-              Faculty of Computer Science
-            </p>
-          </div>
+          Cancel
         </Link>
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark flex items-center"
+        >
+          <FaSave className="mr-2" />
+          {loading ? "create..." : "create"}
+        </button>
+      </div>
+    </form>
+  </div>
+  )
+}
 
-        {/* Login Link */}
-        <p className="text-center text-sm text-text-secondary">
-          Already have an account?{" "}
-          <Link
-            href="/login"
-            className="font-medium text-primary hover:text-primary-dark"
-          >
-            Login here
-          </Link>
-        </p>
-      </form>
-    </div>
-  );
-};
-
-export default SignUpForm;
+export default RegisterStudentForm

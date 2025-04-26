@@ -10,31 +10,51 @@ import { CiCalendar } from "react-icons/ci";
 import { IoNotificationsOutline, IoSettingsOutline } from "react-icons/io5";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const Links = [
-  { id: 0, label: "home", icon: <AiOutlineHome />, path: "/dashboard" },
-  { id: 1, label: "Courses", icon: <BiBookOpen />, path: "/dashboard/courses" },
+  { id: 0, label: "home", icon: <AiOutlineHome />, path: "/student/dashboard" },
+  {
+    id: 1,
+    label: "Courses",
+    icon: <BiBookOpen />,
+    path: "/student/dashboard/courses",
+  },
   {
     id: 2,
     label: "Assignments",
     icon: <MdOutlineAssignment />,
-    path: "/dashboard/assignments",
+    path: "/student/dashboard/assignments",
   },
-  { id: 3, label: "Files", icon: <FiFileText />, path: "/dashboard/files" },
-  { id: 4, label: "Schedule", icon: <CiCalendar />, path: "/dashboard/schedule" },
+  {
+    id: 3,
+    label: "Files",
+    icon: <FiFileText />,
+    path: "/student/dashboard/files",
+  },
+  {
+    id: 4,
+    label: "Schedule",
+    icon: <CiCalendar />,
+    path: "/student/dashboard/schedule",
+  },
   {
     id: 5,
     label: "Notifications",
     icon: <IoNotificationsOutline />,
-    path: "/dashboard/notifications",
+    path: "/student/dashboard/notifications",
   },
-  { id: 6, label: "Settings", icon: <IoSettingsOutline />, path: "/dashboard/settings" },
+  {
+    id: 6,
+    label: "Settings",
+    icon: <IoSettingsOutline />,
+    path: "/student/dashboard/settings",
+  },
 ];
 
 const Sidebar = () => {
-  const pathName = usePathname()
-  console.log(pathName)
-  
+  const { data: session, status } = useSession();
+  const pathName = usePathname();
   const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
@@ -100,19 +120,23 @@ const Sidebar = () => {
 
         {/* User Info */}
         <div
-          className={`absolute bottom-5 w-full ${
-            isExpanded ? "px-4" : "px-0"
-          } `}
+          className={`absolute bottom-5 w-full ${isExpanded ? "px-4" : "px-0"}`}
         >
-          <div className="flex items-center justify-center space-x-3 p-4 bg-primary-light rounded-md text-white">
-            <div className="w-10 h-10 rounded-full bg-gray-300"></div>
             {isExpanded && (
-              <div>
-                <p className="text-sm font-semibold">User one</p>
-                <p className="text-xs text-gray-300">Computer Science</p>
+          <div className="flex items-center justify-center space-x-3 p-4 bg-primary-light rounded-md text-white">
+            <div className="w-10 h-10 rounded-full bg-gray-300" />
+            <div>
+                {session?.user?.name ? (
+                  <>
+                    <p className="text-sm font-semibold">{session.user.name}</p>
+                    <p className="text-xs text-gray-300">{session.user.academicId}</p>
+                  </>
+                ) : (
+                  <p className="text-sm font-semibold">ضيف</p>
+                )}
               </div>
-            )}
           </div>
+            )}
         </div>
       </div>
     </aside>

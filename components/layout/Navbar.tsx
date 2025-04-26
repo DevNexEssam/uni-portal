@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { GiBookmarklet } from "react-icons/gi";
-import { studentAuthOptions } from "@/lib/studentAuthOptions";
+// import { studentAuthOptions } from "@/lib/studentAuthOptions";
 import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
 
 const Navbar = async () => {
   const navLinks = [
@@ -11,7 +12,7 @@ const Navbar = async () => {
     { id: "faq", label: "FAQ" },
   ];
 
-  const session = await getServerSession(studentAuthOptions);
+  const session = await getServerSession(authOptions);
 
   return (
     <nav className="bg-background shadow-sm py-6 px-6 z-50 sticky top-0">

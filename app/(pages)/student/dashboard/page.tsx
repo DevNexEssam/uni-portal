@@ -5,14 +5,17 @@ import { FiCalendar, FiFileText } from "react-icons/fi";
 import RecentlyUploadedFilesCard from "@/components/ui/RecentlyUploadedFilesCard ";
 import UpcomingScheduleCard from "@/components/ui/UpcomingScheduleCard";
 import { MdOutlineTimelapse } from "react-icons/md";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../../../lib/authOptions";
 
 const DashboardPage = async () => {
+  const session = await getServerSession(authOptions)
   return (
     <div className="text-black">
       <div>
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p className="text-text-secondary">
-          Welcome back, John. Here's what's happening with your courses.
+          Welcome back, {session?.user.academicId} Here's what's happening with your courses.
         </p>
       </div>
       {/* top */}
