@@ -1,21 +1,16 @@
 "use client";
-import React, { useState } from "react";
-import {
-  FiBell,
-  FiLogOut,
-  FiUser,
-  FiSettings,
-  FiChevronDown,
-} from "react-icons/fi";
-import Image from "next/image";
+
+import { useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import { FiBell, FiLogOut, FiUser, FiSettings, FiChevronDown } from "react-icons/fi";
+import Link from "next/link";
 
 const DashboardNavbar = () => {
+  const { data: session } = useSession();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const user = {
-    name: "User one",
-    avatar: "/user.png",
-    role: "Student",
-  };
+
+  const userName = session?.user?.name || "Guest";
+  const userRole = "Student";
 
   return (
     <nav className="bg-background shadow-md px-6 py-4">
@@ -44,29 +39,14 @@ const DashboardNavbar = () => {
               aria-expanded={isDropdownOpen}
               aria-haspopup="true"
             >
-              {user.avatar ? (
-                <div className="relative w-8 h-8 rounded-full overflow-hidden">
-                  <Image
-                    src={user.avatar}
-                    alt={user.name}
-                    fill
-                    className="object-cover"
-                    sizes="32px"
-                  />
-                </div>
-              ) : (
-                <div className="relative w-8 h-8 rounded-full overflow-hidden">
-                  <Image
-                    src="/user.png"
-                    alt="Default user avatar"
-                    fill
-                    className="object-cover"
-                    sizes="32px"
-                  />
-                </div>
-              )}
+              {/* Avatar Circle */}
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary-light text-white font-bold text-lg">
+                {userName.charAt(0).toUpperCase()}
+              </div>
+
+              {/* Name + Arrow */}
               <span className="font-medium text-text hidden md:inline-flex items-center gap-1">
-                {user.name}
+                {userName}
                 <FiChevronDown
                   className={`transition-transform duration-200 ${
                     isDropdownOpen ? "rotate-180" : ""
@@ -82,29 +62,29 @@ const DashboardNavbar = () => {
                 onMouseLeave={() => setIsDropdownOpen(false)}
               >
                 <div className="px-4 py-2 border-b border-gray-100">
-                  <p className="text-sm font-medium text-text">{user.name}</p>
-                  <p className="text-xs text-text-secondary">{user.role}</p>
+                  <p className="text-sm font-medium text-text">{userName}</p>
+                  <p className="text-xs text-text-secondary">{userRole}</p>
                 </div>
 
-                <a
+                <Link
                   href="/profile"
                   className="flex items-center px-4 py-2 text-sm text-text hover:bg-background-secondary transition duration-150"
                 >
                   <FiUser className="mr-2" />
                   Profile
-                </a>
+                </Link>
 
-                <a
+                <Link
                   href="/settings"
                   className="flex items-center px-4 py-2 text-sm text-text hover:bg-background-secondary transition duration-150"
                 >
                   <FiSettings className="mr-2" />
                   Settings
-                </a>
+                </Link>
 
                 <button
                   onClick={() => {
-                    console.log("User logged out");
+                    signOut()
                   }}
                   className="w-full text-left flex items-center px-4 py-2 text-sm text-red-500 hover:bg-red-50 transition duration-150"
                 >

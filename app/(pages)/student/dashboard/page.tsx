@@ -1,12 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
-import StartCard from "@/components/ui/StartCard";
+// import StartCard from "@/components/ui/StartCard";
 import Link from "next/link";
-import { FiCalendar, FiFileText } from "react-icons/fi";
+// import { FiCalendar, FiFileText } from "react-icons/fi";
 import RecentlyUploadedFilesCard from "@/components/ui/RecentlyUploadedFilesCard ";
 import UpcomingScheduleCard from "@/components/ui/UpcomingScheduleCard";
-import { MdOutlineTimelapse } from "react-icons/md";
+// import { MdOutlineTimelapse } from "react-icons/md";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../../lib/authOptions";
+import { authOptions } from "@/lib/authOptions";
+import StartSection from "@/components/StartSection";
 
 const DashboardPage = async () => {
   const session = await getServerSession(authOptions)
@@ -15,36 +16,11 @@ const DashboardPage = async () => {
       <div>
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p className="text-text-secondary">
-          Welcome back, {session?.user.academicId} Here's what's happening with your courses.
+          Welcome back, {session?.user.name} Here's what's happening with your courses.
         </p>
       </div>
       {/* top */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5 ">
-        <StartCard
-          title="Total Courses"
-          count={5}
-          icon={<FiFileText />}
-          iconClass="text-primary"
-          colorClass="border-primary"
-          link="/dashboard"
-        />
-        <StartCard
-          title="Upcoming Deadlines"
-          count={5}
-          icon={<MdOutlineTimelapse />}
-          iconClass="text-warning"
-          colorClass="border-warning"
-          link="/dashboard"
-        />
-        <StartCard
-          title="Today's Schedule"
-          count={5}
-          icon={<FiCalendar />}
-          iconClass="text-green-400"
-          colorClass="border-green-400"
-          link="/dashboard"
-        />
-      </div>
+      <StartSection />
 
       {/* bottom */}
       <div className="grid grid-cols-2 gap-5 mt-5">
