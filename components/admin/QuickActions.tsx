@@ -7,28 +7,28 @@ export default function QuickActions() {
     { 
       title: "Add Student", 
       icon: <FaUsers className="text-xl" />, 
-      link: "/admin/students/add",
+      link: "/admin/dashboard/students/add-student",
       bgColor: "bg-primary-light/10",
       iconColor: "text-primary"
     },
     { 
       title: "Create Course", 
       icon: <FaBook className="text-xl" />, 
-      link: "/admin/courses/add",
+      link: "/admin/dashboard/courses/add-course",
       bgColor: "bg-success/10",
       iconColor: "text-success"
     },
     { 
       title: "Schedule Meeting", 
       icon: <FaCalendarAlt className="text-xl" />, 
-      link: "/admin/meetings/add",
+      link: "/admin/dashboard/schedules/add-schedule",
       bgColor: "bg-warning/10",
       iconColor: "text-warning"
     },
     { 
       title: "Generate Report", 
       icon: <FaChartLine className="text-xl" />, 
-      link: "/admin/reports",
+      link: "/admin/dashboard/reports",
       bgColor: "bg-error/10",
       iconColor: "text-error"
     }
