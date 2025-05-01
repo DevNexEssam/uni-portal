@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import DashboardNavbar from "@/components/layout/DashboardNavbar";
 import { getServerSession } from "next-auth";
-// import { studentAuthOptions } from "@/lib/studentAuthOptions";
 import { redirect } from "next/navigation";
 import { Providers } from "@/components/ui/providers";
 import { authOptions } from "@/lib/authOptions";

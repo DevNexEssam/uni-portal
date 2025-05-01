@@ -124,25 +124,25 @@ const Sidebar = () => {
 
       {/* User Info */}
       <div className={`p-4 border-t border-primary-light  ${isExpanded ? "px-4" : "px-2"}`}>
-        <div className={`flex items-center bg-primary-light ${isExpanded ? "justify-start space-x-3" : "justify-center"} p-4 rounded-md text-white`}>
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 text-white font-semibold">
-            {session?.user.name ? session?.user.name.charAt(0).toUpperCase() : ""}
-          </div>
-          {isExpanded && (
-            <div className="overflow-hidden">
-              {session?.user?.name ? (
-                <>
-                  <p className="text-sm font-semibold">{session.user.name}</p>
-                  <p className="text-xs text-gray-300">
-                    {session.user.academicId || "Student"}
-                  </p>
-                </>
-              ) : (
-                <Loading />
-              )}
-            </div>
-          )}
-        </div>
+      {session?.user.name ? (
+                <div className={`flex items-center bg-primary-light ${isExpanded ? "justify-start space-x-3" : "justify-center"} p-4 rounded-md text-white`}>
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 text-white font-semibold">
+                  {session?.user.name ? session?.user.name.charAt(0).toUpperCase() : ""}
+                </div>
+                {isExpanded && (
+                  <div className="overflow-hidden">
+                      <>
+                        <p className="text-sm font-semibold">{session.user.name}</p>
+                        <p className="text-xs text-gray-300">
+                          {session.user.academicId || "Student"}
+                        </p>
+                      </>
+                  </div>
+                )}
+              </div>
+      ) : (
+        <Loading bg="border-r-white" />
+      )}
       </div>
     </aside>
   );

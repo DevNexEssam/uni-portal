@@ -13,7 +13,8 @@ export async function GET(req: Request) {
 
   await connectDB();
 
-  const student = await Student.findOne({ academicId: session.user?.academicId }).populate("academicId");
+  const student = await Student.findOne({ academicId: session.user?.academicId })
+    .populate("courses");
 
   if (!student) {
     return NextResponse.json({ message: "Student not found" }, { status: 404 });

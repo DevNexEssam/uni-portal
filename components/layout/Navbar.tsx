@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { GiBookmarklet } from "react-icons/gi";
-// import { studentAuthOptions } from "@/lib/studentAuthOptions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 

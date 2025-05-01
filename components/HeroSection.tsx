@@ -42,7 +42,7 @@ const HeroSection = () => {
 
             {/* Secondary Button */}
             <Link
-              href="/dashboard"
+              href="/student/dashboard"
               className="relative flex items-center justify-center px-8 py-4 border-2 border-primary text-primary bg-transparent rounded-xl hover:bg-primary/5 transition-all duration-300 group overflow-hidden"
             >
               <span className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>

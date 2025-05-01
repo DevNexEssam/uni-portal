@@ -1,12 +1,13 @@
 import { ReactNode } from "react";
-import { adminAuthOptions } from "@/lib/adminAuthOptions";
+// import { adminAuthOptions } from "@/lib/adminAuthOptions";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Sidebar from "@/components/admin/Sidebar";
 import AdminHeader from "@/components/admin/AdminHeader";
+import { authOptions } from "../../../../lib/authOptions";
 
 const LayoutDashboard = async ({ children }: { children: ReactNode }) => {
-  const session = await getServerSession(adminAuthOptions);
+  const session = await getServerSession(authOptions);
 
   if (session?.user?.role !== "admin") {
     redirect("/admin/login");
