@@ -173,7 +173,7 @@ const CourseForm = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Department */}
+          {/* faculty */}
           <div>
             <label className="block text-sm font-medium text-text mb-1">
               faculty

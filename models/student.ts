@@ -9,6 +9,7 @@ export interface IUser extends Document {
   department: string;
   academicLevel: string;
   courses: Types.ObjectId[];
+  schedules: Types.ObjectId[];
   phone: string;
 }
 
@@ -41,6 +42,10 @@ export const UserSchema = new Schema<IUser>(
     },
     courses: {
       type: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
+      default: [],
+    },
+    schedules : {
+      type: [{ type: Schema.Types.ObjectId, ref: 'Schedule' }],
       default: [],
     },
     phone: {

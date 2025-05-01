@@ -1,19 +1,28 @@
-'use client';
-import { FaCalendarAlt, FaUserTie, FaUsers, FaSave } from 'react-icons/fa';
-import Link from 'next/link';
+"use client";
+import {
+  FaCalendarAlt,
+  FaSave,
+  FaChalkboardTeacher,
+  FaBook,
+  FaHashtag,
+  FaClock,
+  FaAlignLeft,
+} from "react-icons/fa";
+import Link from "next/link";
 
 export default function AddMeetingPage() {
-  const meetingTypes = ['Faculty Meeting', 'Department Meeting', 'Committee Meeting', 'Student Meeting'];
-  const organizers = ['Dr. Ahmed Mohamed', 'Dr. Salma Mostafa', 'Dean Office', 'Student Affairs'];
+  const departments = ["Data Science", "Software Engineering", "Cybersecurity"];
+  const faculty = ["Faculty of Engineering", "Faculty of Computer Science"];
+  const academicLevels = ["1st Year", "2nd Year", "3rd Year", "4th Year"];
 
   return (
-      <>
+    <>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-text flex items-center">
           <FaCalendarAlt className="mr-2 text-primary" />
           Schedule New Meeting
         </h1>
-        <Link 
+        <Link
           href="/admin/dashboard/meetings"
           className="text-primary hover:text-primary-dark flex items-center"
         >
@@ -24,112 +33,133 @@ export default function AddMeetingPage() {
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <form className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Meeting Code */}
+            <div>
+              <label className="text-sm font-medium text-text mb-1 flex items-center">
+                <FaHashtag className="mr-2 text-primary" />
+                Meeting Code
+              </label>
+              <input
+                type="text"
+                className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+                placeholder="CS201"
+              />
+            </div>
+
             {/* Meeting Title */}
             <div>
-              <label className="block text-sm font-medium text-text mb-1">
+              <label className="text-sm font-medium text-text mb-1 flex items-center">
+                <FaBook className="mr-2 text-primary" />
                 Meeting Title (Required)
               </label>
               <input
                 type="text"
                 className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-                placeholder="Monthly Faculty Meeting"
-                required
+                placeholder="Meeting Title"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Meeting Start Time */}
+            <div>
+              <label className="text-sm font-medium text-text mb-1 flex items-center">
+                <FaClock className="mr-2 text-primary" />
+                Start Time (Required)
+              </label>
+              <input
+                type="datetime-local"
+                className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
               />
             </div>
 
-            {/* Meeting Type */}
+            {/* Meeting End Time */}
+            <div>
+              <label className="text-sm font-medium text-text mb-1 flex items-center">
+                <FaClock className="mr-2 text-primary" />
+                End Time (Required)
+              </label>
+              <input
+                type="datetime-local"
+                className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Department */}
             <div>
               <label className="block text-sm font-medium text-text mb-1">
-                Meeting Type
+                Department (Required)
               </label>
               <select className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
-                {meetingTypes.map((type, i) => (
-                  <option key={i} value={type}>{type}</option>
+                <option value="">Select Department</option>
+                {departments.map((dept, i) => (
+                  <option key={i} value={dept}>
+                    {dept}
+                  </option>
                 ))}
               </select>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Date */}
+            {/* Instructor */}
             <div>
-              <label className="block text-sm font-medium text-text mb-1">
-                Date (Required)
+              <label className="text-sm font-medium text-text mb-1 flex items-center">
+                <FaChalkboardTeacher className="mr-2 text-primary" />
+                Instructor (Required)
               </label>
               <input
-                type="date"
+                type="text"
                 className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-                required
-              />
-            </div>
-
-            {/* Time */}
-            <div>
-              <label className="block text-sm font-medium text-text mb-1">
-                Time (Required)
-              </label>
-              <input
-                type="time"
-                className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-                required
+                placeholder="Instructor Name"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Organizer */}
+            {/* faculty */}
             <div>
-              <label className="text-sm font-medium text-text mb-1 flex items-center">
-                <FaUserTie className="mr-2 text-primary" />
-                Organizer (Required)
+              <label className="block text-sm font-medium text-text mb-1">
+                Faculty (Required)
               </label>
-              <select
-                className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-                required
-              >
-                {organizers.map((organizer, i) => (
-                  <option key={i} value={organizer}>{organizer}</option>
+              <select className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
+                <option value="">Select Faculty</option>
+                {faculty.map((dept, i) => (
+                  <option key={i} value={dept}>
+                    {dept}
+                  </option>
                 ))}
               </select>
             </div>
 
-            {/* Attendees */}
+            {/* Academic Level */}
             <div>
               <label className="text-sm font-medium text-text mb-1 flex items-center">
-                <FaUsers className="mr-2 text-primary" />
-                Expected Attendees
+                <FaChalkboardTeacher className="mr-2 text-primary" />
+                Academic Level (Required)
               </label>
-              <input
-                type="number"
-                min="1"
-                className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-                placeholder="25"
-              />
+              <select className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary">
+                <option value="">Select Academic Level</option>
+                {academicLevels.map((level, i) => (
+                  <option key={i} value={level}>
+                    {level}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
-          {/* Location */}
+          {/* Meeting Description */}
           <div>
-            <label className="block text-sm font-medium text-text mb-1">
-              Location
-            </label>
-            <input
-              type="text"
-              className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-              placeholder="Main Conference Room"
-            />
-          </div>
-
-          {/* Agenda */}
-          <div>
-            <label className="block text-sm font-medium text-text mb-1">
-              Meeting Agenda
+            <label className="text-sm font-medium text-text mb-1 flex items-center">
+              <FaAlignLeft className="mr-2 text-primary" />
+              Meeting Description
             </label>
             <textarea
-              rows={4}
               className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-              placeholder="Enter meeting agenda..."
-            ></textarea>
+              rows={3}
+              placeholder="Enter meeting description..."
+            />
           </div>
 
           <div className="flex justify-end space-x-4 pt-4">
@@ -149,6 +179,6 @@ export default function AddMeetingPage() {
           </div>
         </form>
       </div>
-      </>
+    </>
   );
 }

@@ -4,7 +4,7 @@ import { Student } from "@/models/student"
 import bcrypt from "bcryptjs"
 
 export async function POST (req : Request) {
-    const {name, academicId, password, faculty, department, academicLevel , coursers , phone , role} = await req.json()
+    const {name, academicId, password, faculty, department, academicLevel , coursers , schedules , phone , role} = await req.json()
     await connectDB()
 
     const studentExist = await Student.findOne({academicId})
@@ -12,7 +12,7 @@ export async function POST (req : Request) {
 
     const hashedPassword = await bcrypt.hash(password , 10)
 
-    const newStudent = new Student({name, academicId, password: hashedPassword , faculty, department , academicLevel, coursers , phone , role})
+    const newStudent = new Student({name, academicId, password: hashedPassword , faculty, department , academicLevel, coursers , schedules, phone , role})
     await newStudent.save()
 
     return NextResponse.json({ message: "Student registered successfully" }, { status: 201 });
