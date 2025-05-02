@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import { FaCalendarAlt, FaPlus, FaSearch, FaUserTie } from 'react-icons/fa';
 
@@ -9,15 +10,25 @@ export default function MeetingsPage() {
     { id: 'MT003', title: 'Department Assembly', date: '2023-10-05', time: '11:00 AM', organizer: 'Dean', status: 'Completed' }
   ];
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('All Meetings');
+
+  // فلترة الاجتماعات بناءً على الحالة والكلمة المفتاحية
+  const filteredMeetings = meetings.filter((meeting) => {
+    const matchesSearch = meeting.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus = statusFilter === 'All Meetings' || meeting.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
+
   return (
-      <>
+    <>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-text flex items-center">
           <FaCalendarAlt className="mr-2 text-primary" />
           Meetings Schedule
         </h1>
         <Link 
-          href="/admin/dashboard/meetings/add-meeting"
+          href="/admin/dashboard/schedules/add-schedule"
           className="flex items-center bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-dark"
         >
           <FaPlus className="mr-2" />
@@ -35,9 +46,15 @@ export default function MeetingsPage() {
               type="text"
               placeholder="Search meetings..."
               className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <select className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-primary focus:border-primary">
+          <select
+            className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-primary focus:border-primary"
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
             <option>All Meetings</option>
             <option>Upcoming</option>
             <option>Completed</option>
@@ -57,7 +74,7 @@ export default function MeetingsPage() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {meetings.map((meeting) => (
+              {filteredMeetings.map((meeting) => (
                 <tr key={meeting.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text">{meeting.title}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
@@ -95,6 +112,6 @@ export default function MeetingsPage() {
           </table>
         </div>
       </div>
-      </>
+    </>
   );
 }

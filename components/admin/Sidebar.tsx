@@ -8,7 +8,7 @@ const sidebarLinks = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: <FiHome className="text-lg" /> },
   { href: '/admin/dashboard/students', label: 'Students', icon: <FaUsers className="text-lg" /> },
   { href: '/admin/dashboard/courses', label: 'Courses', icon: <FaBook className="text-lg" /> },
-  { href: '/admin/dashboard/meetings', label: 'Meetings', icon: <FaCalendarAlt className="text-lg" /> },
+  { href: '/admin/dashboard/schedules', label: 'schedules', icon: <FaCalendarAlt className="text-lg" /> },
   { href: '/admin/dashboard/reports', label: 'Reports', icon: <FaFileAlt className="text-lg" /> },
   { href: '/admin/dashboard/settings', label: 'Settings', icon: <FaCog className="text-lg" /> },
 ];
