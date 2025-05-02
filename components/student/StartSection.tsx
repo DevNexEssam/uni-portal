@@ -1,16 +1,17 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import StartCard from "@/components/ui/StartCard";
 import { FiCalendar, FiFileText } from "react-icons/fi";
 import { MdOutlineTimelapse } from "react-icons/md";
 import axios from "axios";
-import Loading from "./ui/loading";
+import Loading from "../ui/loading";
 
 const StartSection = () => {
   const [courses, setCourses] = useState([]);
+  const [schedules, setSchedules] = useState([]);
   const [loading, setLoading] = useState(true);
 
-//   fetch courser
+  //   fetch courser
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -24,7 +25,23 @@ const StartSection = () => {
     };
     fetchCourses();
   }, []);
-  if (loading) return <Loading bg="border-r-primary"  />
+
+  // fetch schedules
+  useEffect(() => {
+    const fetchSchedules = async () => {
+      try {
+        const { data } = await axios.get("/api/student/schedule");
+        setSchedules(data.schedules);
+      } catch (error) {
+        console.error("Error fetching schedules:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSchedules();
+  }, []);
+
+  if (loading) return <Loading bg="border-r-primary" />;
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5 ">
       <StartCard
@@ -45,7 +62,7 @@ const StartSection = () => {
       />
       <StartCard
         title="Today's Schedule"
-        count={5}
+        count={schedules.length}
         icon={<FiCalendar />}
         iconClass="text-green-400"
         colorClass="border-green-400"

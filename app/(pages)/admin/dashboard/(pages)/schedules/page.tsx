@@ -13,7 +13,6 @@ export default function MeetingsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All Meetings');
 
-  // فلترة الاجتماعات بناءً على الحالة والكلمة المفتاحية
   const filteredMeetings = meetings.filter((meeting) => {
     const matchesSearch = meeting.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus = statusFilter === 'All Meetings' || meeting.status === statusFilter;

@@ -34,7 +34,7 @@ const Navbar = async () => {
         </div>
 
         <div>
-          {session ? (
+          {session?.user?.role == "student" ? (
             <Link
               href="/student/dashboard"
               className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-200"

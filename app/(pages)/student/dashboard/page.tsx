@@ -3,20 +3,21 @@
 import Link from "next/link";
 // import { FiCalendar, FiFileText } from "react-icons/fi";
 import RecentlyUploadedFilesCard from "@/components/ui/RecentlyUploadedFilesCard ";
-import UpcomingScheduleCard from "@/components/ui/UpcomingScheduleCard";
 // import { MdOutlineTimelapse } from "react-icons/md";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
-import StartSection from "@/components/StartSection";
+import StartSection from "@/components/student/StartSection";
+import UpcomingScheduleSection from "../../../../components/student/UpcomingScheduleSection";
 
 const DashboardPage = async () => {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions);
   return (
     <div className="text-black">
       <div>
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p className="text-text-secondary">
-          Welcome back, {session?.user.name} Here's what's happening with your courses.
+          👋🏻Welcome back, {session?.user.name} Here's what's happening with your
+          courses.
         </p>
       </div>
       {/* top */}
@@ -56,36 +57,7 @@ const DashboardPage = async () => {
           </div>
         </div>
         {/* Upcoming Schedule */}
-        <div className="border border-slate-200 rounded-lg p-4">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-text font-bold">Upcoming Schedule</span>
-            <span>
-              <Link
-                href="/dashboard"
-                className="text-xs text-primary hover:underline font-medium"
-              >
-                View calendar
-              </Link>
-            </span>
-          </div>
-          <div className="flex flex-col gap-4">
-            <UpcomingScheduleCard
-              title="Algorithms Lecture"
-              course="Course 1"
-              time="2023-10-01 10:00 AM"
-            />
-            <UpcomingScheduleCard
-              title="Algorithms Lecture"
-              course="Course 1"
-              time="2023-10-01 10:00 AM"
-            />
-            <UpcomingScheduleCard
-              title="Algorithms Lecture"
-              course="Course 1"
-              time="2023-10-01 10:00 AM"
-            />
-          </div>
-        </div>
+        <UpcomingScheduleSection />
       </div>
     </div>
   );

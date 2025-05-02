@@ -2,6 +2,18 @@ import React from 'react';
 import { FiCalendar } from 'react-icons/fi';
 import { UpcomingScheduleCardProps } from '../../types';
 
+const formatTime = (isoTime: string) => {
+  const date = new Date(isoTime);
+  return date.toLocaleString('en-EG', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
+};
+
 const UpcomingScheduleCard = ({ title, course, time }: UpcomingScheduleCardProps) => {
   return (
     <div className="space-y-4">
@@ -16,7 +28,7 @@ const UpcomingScheduleCard = ({ title, course, time }: UpcomingScheduleCardProps
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-text-secondary">{time}</span>
+          <span className="text-xs text-text-secondary">{formatTime(time)}</span>
         </div>
       </div>
     </div>
