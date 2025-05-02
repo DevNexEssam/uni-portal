@@ -42,6 +42,22 @@ export default function StudentsSection() {
     fetchStudents();
   }, []);
 
+  const handleDelete = async ( studentId : string ) => {
+
+    try {
+      await axios.delete("/api/admin/students", {
+        data: { id: studentId },
+      })
+      setStudents(students.filter(student => student._id !== studentId))
+      alert("student deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting student:", error);
+      alert("Failed to delete student");
+      
+    }
+
+  }
+
   if (loading) return <Loading />;
 
   return (
@@ -143,7 +159,9 @@ export default function StudentsSection() {
                     >
                       Edit
                     </Link>
-                    <button className="text-error hover:text-error-dark">
+                    <button 
+                    onClick={() => handleDelete(student._id)}
+                    className="text-error hover:text-error-dark">
                       Delete
                     </button>
                   </td>
