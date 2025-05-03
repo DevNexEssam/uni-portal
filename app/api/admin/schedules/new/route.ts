@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "../../../../lib/mongodb";
-import Schedule from "../../../../models/schedule";
-import Student from "../../../../models/student";
+import { connectDB } from "../../../../../lib/mongodb";
+import Schedule from "../../../../../models/schedule";
+import Student from "../../../../../models/student";
 
 export async function POST(req: Request) { 
     const { meetingCode, meetingTitle, startTime, endTime, department, faculty, instructor , academicLevel , description } = await req.json();

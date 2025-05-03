@@ -47,7 +47,7 @@ const RegisterStudentForm = () => {
         setLoading(false);
       }
       try {
-        await axios.post("/api/student/new", student);
+        await axios.post("/api/admin/students/new", student);
         setSuccess("Student added successfully!");
         setTimeout(() => {
           setSuccess("");

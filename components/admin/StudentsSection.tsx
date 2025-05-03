@@ -16,6 +16,8 @@ type Student = {
 export default function StudentsSection() {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
 
   const [searchTerm, setSearchTerm] = useState("");
   const [departmentFilter, setDepartmentFilter] = useState("All Departments");
@@ -31,7 +33,6 @@ export default function StudentsSection() {
     const fetchStudents = async () => {
       try {
         const { data } = await axios.get("/api/admin/students");
-        console.log("API Response", data);
         setStudents(data);
       } catch (error) {
         console.error("Error fetching students:", error);
@@ -42,20 +43,33 @@ export default function StudentsSection() {
     fetchStudents();
   }, []);
 
+  // Handle delete student
   const handleDelete = async ( studentId : string ) => {
-
     try {
       await axios.delete("/api/admin/students", {
         data: { id: studentId },
       })
       setStudents(students.filter(student => student._id !== studentId))
-      alert("student deleted successfully!");
-    } catch (error) {
+      setSuccess("student deleted successfully!");
+      setTimeout(
+        () => {
+          setSuccess("");
+          setError("");
+        },
+        3000
+      )
+    } catch (error : any) {
       console.error("Error deleting student:", error);
-      alert("Failed to delete student");
-      
+      setSuccess("");
+      setError(error.response.data.message || "Failed to delete student");
+      setTimeout(
+        () => {
+          setSuccess("");
+          setError("");
+        },
+        3000
+      )
     }
-
   }
 
   if (loading) return <Loading />;
@@ -77,6 +91,16 @@ export default function StudentsSection() {
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        {success && (
+          <div className="bg-success/10 text-success p-4 rounded-lg mb-4">
+            {success}
+          </div>
+        )}
+        {error && (
+          <div className="bg-error/10 text-error p-4 rounded-lg mb-4">
+            {error}
+          </div>
+        )}
         <div className="mb-4 flex justify-between items-center">
           <div className="relative w-64">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

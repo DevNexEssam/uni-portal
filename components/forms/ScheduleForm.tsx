@@ -52,7 +52,7 @@ export default function ScheduleForm() {
     }
 
     try {
-      await axios.post("/api/schedule/new", schedule);
+      await axios.post("/api/admin/schedules/new", schedule);
       setSuccess("Meeting scheduled successfully!");
       setTimeout(() => {
         setSuccess("");

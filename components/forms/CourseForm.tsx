@@ -44,7 +44,7 @@ const CourseForm = () => {
       setLoading(false);
     }
     try {
-      await axios.post("/api/course/new", course);
+      await axios.post("/api/admin/courses/new", course);
       setSuccess("Course added successfully!");
       setTimeout(() => {
         setSuccess("");
