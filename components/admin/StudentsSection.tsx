@@ -178,7 +178,7 @@ export default function StudentsSection() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
                     <Link 
-                      href={`/admin/students/${student._id}`}
+                      href={`/admin/dashboard/students/edit-student/${student._id}`}
                       className="text-primary hover:text-primary-dark mr-3"
                     >
                       Edit
