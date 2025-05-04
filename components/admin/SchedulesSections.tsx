@@ -142,7 +142,7 @@ export default function SchedulesSections() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
                     <Link 
-                      href={`/admin/students/${schedule._id}`}
+                      href={`/admin/dashboard/schedules/edit-schedule/${schedule._id}`}
                       className="text-primary hover:text-primary-dark mr-3"
                     >
                       Edit
