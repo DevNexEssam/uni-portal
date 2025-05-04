@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import axios from "axios";
 import { useParams } from "next/navigation";
+import Loading from "../ui/loading";
 
 const StudentEdit = () => {
   const params = useParams();
@@ -54,10 +55,7 @@ const StudentEdit = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.put(`/api/admin/students/${studentId}`, {
-        id: studentId,
-        updates: student,
-      });
+      await axios.patch(`/api/admin/students/${studentId}`, student);
       setSuccess("Student updated successfully!");
       setTimeout(() => {
         setSuccess("");
@@ -69,6 +67,7 @@ const StudentEdit = () => {
       setLoading(false);
     }
   };
+      if (loading) return <Loading />
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       {success && <p className="text-green-500 text-sm mt-1">{success}</p>}
@@ -201,19 +200,9 @@ const StudentEdit = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Password */}
-          <div>
-            <label className="text-sm font-medium text-text mb-1 flex items-center">
-              <FaIdCard className="mr-2 text-primary" />
-              Password (Required)
-            </label>
-          </div>
-        </div>
-
         <div className="flex justify-end space-x-4 pt-4">
           <Link
-            href="/admin/students"
+            href="/admin/dashboard/students"
             className="px-4 py-2 border border-gray-300 rounded-lg text-text hover:bg-background-secondary"
           >
             Cancel

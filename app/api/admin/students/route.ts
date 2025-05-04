@@ -28,18 +28,3 @@ export async function DELETE(req: Request) {
     }
 }
 
-export async function PATCH(req: Request) {
-    try {
-      await connectDB();
-      const { id, updates } = await req.json();
-      const updatedStudent = await Student.findByIdAndUpdate(id, updates, { new: true });
-      if (!updatedStudent) {
-        return NextResponse.json({ message: "Student not found" }, { status: 404 });
-      }
-      return NextResponse.json({ message: "Student updated" }, { status: 200 });
-    } catch (error) {
-      console.error("Error updating student:", error);
-      return NextResponse.json({ message: "Internal server error" }, { status: 500 });
-    }
-  }
-  
