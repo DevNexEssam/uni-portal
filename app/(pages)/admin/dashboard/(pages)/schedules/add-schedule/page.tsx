@@ -12,10 +12,10 @@ const addSchedulePage = () => {
           Schedule New Meeting
         </h1>
         <Link
-          href="/admin/dashboard/meetings"
+          href="/admin/dashboard/schedules"
           className="text-primary hover:text-primary-dark flex items-center"
         >
-          Back to Meetings
+          Back to Schedule
         </Link>
       </div>
 
