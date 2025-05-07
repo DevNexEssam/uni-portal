@@ -21,6 +21,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error("No student found with this Academic ID");
         }
 
+        if (student.status === "Inactive") {
+          throw new Error("Your account is inactive. Please contact support.");
+        }
+
         const isCorrect = await bcrypt.compare(credentials!.password, student.password);
         if (!isCorrect) {
           throw new Error("Password is incorrect");

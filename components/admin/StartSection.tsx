@@ -62,7 +62,7 @@ const StartSection = () => {
   if (loading) return <Loading bg="border-r-primary" />;
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
 
         <StartsCards
           icon={<FaUsers className="text-2xl" />}
@@ -70,12 +70,12 @@ const StartSection = () => {
           value={students.length}
         />
         <StartsCards
-          icon={<IoBookSharp className="text-2xl" />}
+          icon={<IoBookSharp className="text-2xl text-success" />}
           title="All Courses"
           value={courses.length}
         />
         <StartsCards
-          icon={<FaCalendarAlt className="text-2xl" />}
+          icon={<FaCalendarAlt className="text-2xl text-warning" />}
           title="All Schedules"
           value={schedules.length}
         />

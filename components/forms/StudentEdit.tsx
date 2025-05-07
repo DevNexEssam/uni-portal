@@ -28,6 +28,7 @@ const StudentEdit = () => {
     faculty: "",
     academicLevel: "",
     phone: "",
+    status: "",
   });
 
   const [error, setError] = useState("");
@@ -53,7 +54,7 @@ const StudentEdit = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     try {
       await axios.patch(`/api/admin/students/${studentId}`, student);
       setSuccess("Student updated successfully!");
@@ -67,7 +68,7 @@ const StudentEdit = () => {
       setLoading(false);
     }
   };
-      if (loading) return <Loading />
+  if (loading) return <Loading />;
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       {success && <p className="text-green-500 text-sm mt-1">{success}</p>}
@@ -105,9 +106,7 @@ const StudentEdit = () => {
               placeholder="Ahmed Mohamed"
               required
               value={student.name}
-              onChange={(e) =>
-                setStudent({ ...student, name: e.target.value })
-              }
+              onChange={(e) => setStudent({ ...student, name: e.target.value })}
             />
           </div>
         </div>
@@ -197,6 +196,28 @@ const StudentEdit = () => {
                 setStudent({ ...student, phone: e.target.value })
               }
             />
+          </div>
+        </div>
+
+        <div>
+          {/* Status */}
+          <div>
+            <label className="text-sm font-medium text-text mb-1 flex items-center">
+              <FaCalendarAlt className="mr-2 text-primary" />
+              Status
+            </label>
+            <select
+              className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+              value={student.status}
+              onChange={(e) =>
+                setStudent({ ...student, status: e.target.value })
+              }
+            >
+              <option value="">Select Status</option>
+              <option>Active</option>
+              <option>Inactive</option>
+            </select>
+            {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
           </div>
         </div>
 

@@ -11,6 +11,7 @@ export interface IUser extends Document {
   courses: Types.ObjectId[];
   schedules: Types.ObjectId[];
   phone: string;
+  status : string;
 }
 
 export const UserSchema = new Schema<IUser>(
@@ -57,6 +58,10 @@ export const UserSchema = new Schema<IUser>(
       enum: ['student'],
       default: 'student',
     },
+    status : {
+      type: String,
+      required: true,
+    }
   },
   {
     timestamps: true,

@@ -11,6 +11,7 @@ type Student = {
   name: string;
   department: string;
   faculty: string;
+  status: string;
 };
 
 export default function StudentsSection() {
@@ -23,12 +24,17 @@ export default function StudentsSection() {
   const [departmentFilter, setDepartmentFilter] = useState("All Departments");
 
   const filteredStudents = students.filter((student) => {
-    const matchSearch = student.academicId.toLocaleLowerCase().includes(searchTerm.toLowerCase()) || 
+    const matchSearch =
+      student.academicId
+        .toLocaleLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
       student.name.toLocaleLowerCase().includes(searchTerm.toLowerCase());
-    const matchDepartment = departmentFilter === "All Departments" || student.department === departmentFilter;
+    const matchDepartment =
+      departmentFilter === "All Departments" ||
+      student.department === departmentFilter;
     return matchSearch && matchDepartment;
   });
-  
+
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -44,33 +50,27 @@ export default function StudentsSection() {
   }, []);
 
   // Handle delete student
-  const handleDelete = async ( studentId : string ) => {
+  const handleDelete = async (studentId: string) => {
     try {
       await axios.delete("/api/admin/students", {
         data: { id: studentId },
-      })
-      setStudents(students.filter(student => student._id !== studentId))
+      });
+      setStudents(students.filter((student) => student._id !== studentId));
       setSuccess("student deleted successfully!");
-      setTimeout(
-        () => {
-          setSuccess("");
-          setError("");
-        },
-        3000
-      )
-    } catch (error : any) {
+      setTimeout(() => {
+        setSuccess("");
+        setError("");
+      }, 3000);
+    } catch (error: any) {
       console.error("Error deleting student:", error);
       setSuccess("");
       setError(error.response.data.message || "Failed to delete student");
-      setTimeout(
-        () => {
-          setSuccess("");
-          setError("");
-        },
-        3000
-      )
+      setTimeout(() => {
+        setSuccess("");
+        setError("");
+      }, 3000);
     }
-  }
+  };
 
   if (loading) return <Loading />;
 
@@ -116,9 +116,10 @@ export default function StudentsSection() {
           </div>
           <div className="flex space-x-2">
             <select
-            value={departmentFilter}
-            onChange={(e)=> setDepartmentFilter(e.target.value)}
-             className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-primary focus:border-primary">
+              value={departmentFilter}
+              onChange={(e) => setDepartmentFilter(e.target.value)}
+              className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-primary focus:border-primary"
+            >
               <option>All Departments</option>
               <option>Data Science</option>
               <option>Software Engineering</option>
@@ -136,6 +137,7 @@ export default function StudentsSection() {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-background-secondary">
               <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider"></th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                   ID
                 </th>
@@ -143,10 +145,10 @@ export default function StudentsSection() {
                   Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Department
+                  Department
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                   faculty
+                  faculty
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                   Status
@@ -160,6 +162,13 @@ export default function StudentsSection() {
               {filteredStudents.map((student) => (
                 <tr key={student._id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white font-semibold text-lg">
+                        {student.name[0].toUpperCase()}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
                     {student.academicId}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text">
@@ -172,20 +181,27 @@ export default function StudentsSection() {
                     {student.faculty}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 py-1 text-xs rounded-full bg-success/10 text-success">
-                      Active
+                    <span
+                      className={`px-2 py-1 text-xs rounded-full ${
+                        student.status === "Active"
+                          ? "bg-success text-white"
+                          : "bg-error text-white"
+                      }`}
+                    >
+                      {student.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
-                    <Link 
+                    <Link
                       href={`/admin/dashboard/students/edit-student/${student._id}`}
                       className="text-primary hover:text-primary-dark mr-3"
                     >
                       Edit
                     </Link>
-                    <button 
-                    onClick={() => handleDelete(student._id)}
-                    className="text-error hover:text-error-dark">
+                    <button
+                      onClick={() => handleDelete(student._id)}
+                      className="text-error hover:text-error-dark"
+                    >
                       Delete
                     </button>
                   </td>
