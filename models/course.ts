@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 
 export interface Icourse extends Document {
     courseCode: string;
@@ -8,6 +8,7 @@ export interface Icourse extends Document {
     description: string;
     faculty: string;
     academicLevel: string;
+    files : Types.ObjectId[]
 }
 
 export const courseSchema = new Schema<Icourse> ({
@@ -40,6 +41,10 @@ export const courseSchema = new Schema<Icourse> ({
         type: String,
         required: true,
     },
+    files : {
+        type: [{ type: Schema.Types.ObjectId, ref: 'File' }],
+        default: [],
+    }
 }, {
     timestamps: true,
     versionKey: false,

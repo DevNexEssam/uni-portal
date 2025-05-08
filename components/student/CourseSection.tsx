@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaBookOpen, FaChalkboardTeacher, FaUniversity } from "react-icons/fa";
 import Loading from "../ui/loading";
+import Link from "next/link";
 
 // Define Course Type
 type Course = {
@@ -105,9 +106,9 @@ export default function CourseSection() {
 
                     {/* Action Button */}
                     <div className="mt-6">
-                      <button className="w-full py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 font-medium">
+                      <Link href={`/student/dashboard/courses/course-materials/${course._id}`} className="w-full py-2 px-4 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 font-medium">
                         View Course Materials
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
