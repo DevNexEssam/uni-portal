@@ -1,80 +1,86 @@
-import { connectDB } from "@/lib/mongodb";
-import File from "../../../../../models/file";
-import { NextResponse } from "next/server";
-import Course from "../../../../../models/course";
+import { NextResponse } from 'next/server';
+import { connectDB } from '@/lib/mongodb';
+import File from '@/models/file';
+import cloudinary from '@/lib/cloudinary';
+import Course from '../../../../../models/course';
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
+  await connectDB();
+
   try {
-    const formData = await req.formData();
+    const formData = await request.formData();
+    
+    const file = formData.get('file') as File;
+    const fileCode = formData.get('fileCode') as string;
+    const courseCode = formData.get('courseCode') as string;
+    const fileName = formData.get('fileName') as string;
+    const fileDescription = formData.get('fileDescription') as string;
 
-    const metadata = formData.get("metadata") as string;
-    const file = formData.get("file") as File;
-
-    if (!file || !metadata) {
-      return NextResponse.json({ message: "File and metadata are required" }, { status: 400 });
+    if (!file) {
+      return NextResponse.json(
+        { success: false, message: 'No file uploaded' },
+        { status: 400 }
+      );
     }
 
-    const {
-      fileCode,
-      courseCode,
-      fileName,
-      fileDescription,
-      department,
-      faculty,
-      fileType,
-    } = JSON.parse(metadata);
+    const buffer = Buffer.from(await file.arrayBuffer());
 
-    // افتراض أن الرابط بيتولد بشكل أوتوماتيك بعد رفعه على S3 أو Cloudinary
-    const fileUrl = `/uploads/${file.name}`; // أو حط رابط CDN لو بتستخدم تخزين خارجي
-
-    await connectDB();
-
-    const fileExist = await File.findOne({ fileCode });
-
-    if (fileExist) {
-      return NextResponse.json({ message: "File already exists" }, { status: 400 });
-    }
+    const uploadResult = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        { 
+          resource_type: 'auto',
+          folder: 'uni-portal',
+          public_id: `${fileCode}_${Date.now()}`
+        },
+        (error, result) => {
+          if (error) return reject(error);
+          resolve(result);
+        }
+      ).end(buffer);
+    });
 
     const newFile = await File.create({
       fileCode,
       courseCode,
       fileName,
       fileDescription,
-      department,
-      faculty,
-      fileType,
-      fileUrl,
+      fileUrl: uploadResult.secure_url,
     });
 
     const courses = await Course.find({
       courseCode,
-      department,
-      faculty,
-    });
+    })
 
-    const updatePromises = courses.map(async (course) => {
+    const updatePromises = courses.map(async(course)=> {
       try {
-        if (!course.files.some((c) => c.equals(newFile._id))) {
-          course.files.push(newFile._id);
-          await course.save();
-          console.log(`Course updated: ${course.courseCode}`);
+        if(!course.files.some(c => c.equals(newFile._id))) {
+          course.files.push(newFile._id)
+          await course.save()
+          console.log(`File added to course ${course.courseCode}`);
         }
       } catch (error) {
-        console.error(`Error updating course ${course.courseCode}:`, error);
+              console.log(`Error updating course ${course.courseCode}`);
       }
-    });
+    })
 
-    await Promise.all(updatePromises);
+    await Promise.all(updatePromises)
 
+          return NextResponse.json(
+            { 
+              message: "File created and added to course successfully",
+              addedTo: courses.length
+            }, 
+            { status: 201 }
+          );
+
+  } catch (error: any) {
+    console.error('Upload error:', error);
     return NextResponse.json(
-      {
-        message: "File created and added to courses successfully",
-        addedTo: courses.length,
-      },
-      { status: 201 }
+      { 
+        success: false, 
+        message: error.message || 'Upload failed' 
+      }, 
+      { status: 500 }
     );
-  } catch (error) {
-    console.error("Error in File creation:", error);
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }

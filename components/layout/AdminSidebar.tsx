@@ -10,10 +10,11 @@ const sidebarLinks = [
   { href: '/admin/dashboard/courses', label: 'Courses', icon: <FaBook className="text-lg" /> },
   { href: '/admin/dashboard/schedules', label: 'schedules', icon: <FaCalendarAlt className="text-lg" /> },
   { href: '/admin/dashboard/reports', label: 'Reports', icon: <FaFileAlt className="text-lg" /> },
+  { href: '/admin/dashboard/files/add-file', label: 'files', icon: <FaFileAlt className="text-lg" /> },
   { href: '/admin/dashboard/settings', label: 'Settings', icon: <FaCog className="text-lg" /> },
 ];
 
-export default function Sidebar() {
+export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (

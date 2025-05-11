@@ -5,9 +5,7 @@ export interface IFile extends Document {
   courseCode: string;
   fileName: string;
   fileDescription: string;
-  department: string;
-  faculty: string;
-  fileUrl: string; // ✅ رابط ملف الـ PDF من Cloudinary أو غيره
+  fileUrl: string;
 }
 
 export const filesSchema = new Schema<IFile>(
@@ -30,17 +28,9 @@ export const filesSchema = new Schema<IFile>(
       type: String,
       required: true,
     },
-    department: {
-      type: String,
-      required: true,
-    },
-    faculty: {
-      type: String,
-      required: true,
-    },
     fileUrl: {
       type: String,
-      required: true, // ✅ لو هتخليه إلزامي بعد الرفع
+      required: true,
     },
   },
   {
