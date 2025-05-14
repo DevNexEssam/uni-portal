@@ -1,9 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-// import StartCard from "@/components/ui/StartCard";
 import Link from "next/link";
-// import { FiCalendar, FiFileText } from "react-icons/fi";
 import RecentlyUploadedFilesCard from "@/components/ui/RecentlyUploadedFilesCard ";
-// import { MdOutlineTimelapse } from "react-icons/md";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import StartSection from "@/components/student/StartSection";

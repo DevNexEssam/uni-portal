@@ -31,7 +31,6 @@ export async function POST(request: Request) {
           resource_type: 'auto',
           folder: 'uni-portal',
           public_id: `${fileCode}_${Date.now()}`,
-          access_mode: "public"
         },
         (error, result) => {
           if (error) return reject(error);

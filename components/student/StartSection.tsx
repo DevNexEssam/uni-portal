@@ -11,7 +11,7 @@ const StartSection = () => {
   const [schedules, setSchedules] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  //   fetch courser
+  //   fetch courses
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -31,7 +31,7 @@ const StartSection = () => {
     const fetchSchedules = async () => {
       try {
         const { data } = await axios.get("/api/student/schedule");
-        setSchedules(data.schedules);
+        setSchedules(data.schedules)
       } catch (error) {
         console.error("Error fetching schedules:", error);
       } finally {
@@ -62,7 +62,7 @@ const StartSection = () => {
       />
       <StartCard
         title="Today's Schedule"
-        count={schedules.length}
+        count={schedules?.length}
         icon={<FiCalendar />}
         iconClass="text-green-400"
         colorClass="border-green-400"

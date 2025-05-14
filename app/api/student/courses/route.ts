@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/authOptions";
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Student from "@/models/student";
+import "@/models/course";
 
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
