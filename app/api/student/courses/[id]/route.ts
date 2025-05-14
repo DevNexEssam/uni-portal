@@ -9,7 +9,7 @@ export async function GET(
   try {
     await connectDB();
     
-    const course = await Course.findById(params.id).select('-students -__v');
+    const course = await Course.findById(params.id).populate("files");
     
     if (!course) {
       return NextResponse.json(

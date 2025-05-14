@@ -11,12 +11,22 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "../ui/loading";
 
+interface ICourseFile {
+  fileCode: string;
+  courseCode: string;
+  fileName: string;
+  fileDescription: string;
+  fileUrl: string;
+  createdAt: string;
+}
+
 interface ICourse {
   courseCode: string;
   courseName: string;
   instructor: string;
   department: string;
-  description : string
+  description: string;
+  files?: ICourseFile[];
 }
 
 export default function CourseMaterials() {
@@ -25,14 +35,16 @@ export default function CourseMaterials() {
 
   const [course, setCourse] = useState<ICourse | null>(null);
   const [loading, setLoading] = useState(true);
-  // Static course data (replace with real data)
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
         const { data } = await axios.get(`/api/student/courses/${courseId}`);
+        console.log(data);
         setCourse(data);
       } catch (error) {
+        setError("Failed to load course data");
         console.error("Error fetching course:", error);
       } finally {
         setLoading(false);
@@ -42,28 +54,8 @@ export default function CourseMaterials() {
   }, [courseId]);
 
   if (loading) return <Loading />;
-
-  // Static PDF materials data
-  const pdfMaterials = [
-    {
-      _id: "1",
-      title: "Lecture 1 - Introduction",
-      url: "#",
-      uploadDate: "2023-10-15",
-    },
-    {
-      _id: "2",
-      title: "Lecture 2 - Data Structures",
-      url: "#",
-      uploadDate: "2023-10-22",
-    },
-    {
-      _id: "3",
-      title: "Assignment 1 Guidelines",
-      url: "#",
-      uploadDate: "2023-10-25",
-    },
-  ];
+  if (error) return <div className="text-red-500 p-4">{error}</div>;
+  if (!course) return <div className="p-4">Course not found</div>;
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -79,98 +71,100 @@ export default function CourseMaterials() {
         </div>
 
         {/* Course Header */}
-        {course ? (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
-            <div className="bg-primary px-6 py-5">
-              <div className="flex justify-between items-start">
-                <div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-white">
-                    {course?.courseCode}
-                  </span>
-                  <h1 className="text-3xl font-bold mt-2 text-white">
-                    {course?.courseName}
-                  </h1>
-                </div>
-                <div className="p-3 rounded-lg bg-white">
-                  <FaBookOpen className="text-2xl text-primary" />
-                </div>
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
+          <div className="bg-primary px-6 py-5">
+            <div className="flex justify-between items-start">
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-white">
+                  {course.courseCode}
+                </span>
+                <h1 className="text-3xl font-bold mt-2 text-white">
+                  {course.courseName}
+                </h1>
               </div>
-            </div>
-
-            {/* Course Details */}
-            <div className="p-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <FaChalkboardTeacher className="text-primary-light text-xl mr-3" />
-                    <div>
-                      <p className="text-sm text-gray-500">Instructor</p>
-                      <p className="text-lg font-medium">
-                        {course?.instructor}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <FaUniversity className="text-primary-light text-xl mr-3" />
-                    <div>
-                      <p className="text-sm text-gray-500">Department</p>
-                      <p className="text-lg font-medium">
-                        {course?.department}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h3 className="font-medium text-gray-800 mb-3">
-                    Course Description
-                  </h3>
-                  <p className="text-gray-600">
-                    {course.description}
-                  </p>
-                </div>
+              <div className="p-3 rounded-lg bg-white">
+                <FaBookOpen className="text-2xl text-primary" />
               </div>
             </div>
           </div>
-        ) : (
-          <div>Course not found</div>
-        )}
 
-        {/* PDF Materials Section */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="border-b border-gray-200 px-6 py-4">
-            <h2 className="text-xl font-semibold text-gray-800">
-              Course Materials
-            </h2>
-            <p className="text-gray-600 mt-1">PDF resources for your study</p>
-          </div>
-
+          {/* Course Details */}
           <div className="p-6">
-            <div className="space-y-4">
-              {pdfMaterials.map((pdf) => (
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <FaChalkboardTeacher className="text-primary-light text-xl mr-3" />
+                  <div>
+                    <p className="text-sm text-gray-500">Instructor</p>
+                    <p className="text-lg font-medium">{course.instructor}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center">
+                  <FaUniversity className="text-primary-light text-xl mr-3" />
+                  <div>
+                    <p className="text-sm text-gray-500">Department</p>
+                    <p className="text-lg font-medium">{course.department}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h3 className="font-medium text-gray-800 mb-3">
+                  Course Description
+                </h3>
+                <p className="text-gray-600">{course.description}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Course Files Section */}
+        {course.files && course.files.length > 0 && (
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
+            <div className="border-b border-gray-200 px-6 py-4">
+              <h2 className="text-xl font-semibold text-gray-800">
+                Course Files
+              </h2>
+              <p className="text-gray-600 mt-1">
+                {course.files.length} available resource
+                {course.files.length > 1 && "s"}
+              </p>
+            </div>
+
+            <div className="p-6 space-y-4">
+              {course.files.map((file) => (
                 <div
-                  key={pdf._id}
+                  key={file.fileCode}
                   className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50"
                 >
                   <div className="flex items-center">
                     <FaFilePdf className="text-red-500 text-2xl mr-4" />
                     <div>
-                      <h3 className="font-medium text-gray-800">{pdf.title}</h3>
+                      <h3 className="font-medium text-gray-800">
+                        {file.fileName}
+                      </h3>
                       <p className="text-sm text-gray-500">
+                        {file.fileDescription}
+                      </p>
+                      <p className="text-xs text-gray-400 mt-1">
                         Uploaded:{" "}
-                        {new Date(pdf.uploadDate).toLocaleDateString()}
+                        {new Date(file.createdAt).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
-                  <button className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors">
-                    View PDF
-                  </button>
+                  <Link
+                    href={file.fileUrl}
+                    target="_blank"
+                    className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+                  >
+                    View File
+                  </Link>
                 </div>
               ))}
             </div>
           </div>
-        </div>
+        )}
 
         {/* Additional Sections */}
         <div className="mt-8 grid md:grid-cols-2 gap-6">
