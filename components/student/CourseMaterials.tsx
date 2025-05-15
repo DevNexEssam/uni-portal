@@ -127,8 +127,8 @@ export default function CourseMaterials() {
                 Course Files
               </h2>
               <p className="text-gray-600 mt-1">
-                {course.files.length} available resource
-                {course.files.length > 1 && "s"}
+                <span className="text-primary">{course.files.length}</span>{" "}
+                available resource
               </p>
             </div>
 
@@ -153,13 +153,13 @@ export default function CourseMaterials() {
                       </p>
                     </div>
                   </div>
-                  <Link
+                  <a
                     href={file.fileUrl}
-                    target="_blank"
+                    download
                     className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
                   >
-                    View File
-                  </Link>
+                    Download File
+                  </a>
                 </div>
               ))}
             </div>
