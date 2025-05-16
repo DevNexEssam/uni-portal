@@ -1,20 +1,21 @@
 "use client";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { FaHashtag, FaBook, FaAlignLeft, FaLink } from "react-icons/fa";
+import React, { useEffect, useState, useRef } from "react";
+import { FaHashtag, FaBook, FaAlignLeft, FaUpload, FaTimes } from "react-icons/fa";
 
 const FileForm = () => {
-  const [file, setFile] = useState({
+  const [fileData, setFileData] = useState({
     fileCode: "",
     courseCode: "",
     fileName: "",
     fileDescription: "",
   });
-
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [courses, setCourses] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,34 +23,65 @@ const FileForm = () => {
     setError("");
 
     if (
-      !file.courseCode ||
-      !file.fileCode ||
-      !file.fileDescription ||
-      !file.fileName
+      !fileData.courseCode ||
+      !fileData.fileCode ||
+      !fileData.fileDescription ||
+      !fileData.fileName ||
+      !selectedFile
     ) {
-      setError("Please fill in all required fields.");
+      setError("Please fill in all required fields and select a file.");
       setLoading(false);
+      return;
     }
 
     try {
-      await axios.post("/api/admin/files/new" , file);
-      setSuccess("File added successfully!");
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('fileCode', fileData.fileCode);
+      formData.append('courseCode', fileData.courseCode);
+      formData.append('fileName', fileData.fileName);
+      formData.append('fileDescription', fileData.fileDescription);
+
+      await axios.post("/api/admin/files/new", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      setSuccess("File uploaded successfully!");
       setTimeout(() => {
         setSuccess("");
-        setFile({
+        setFileData({
           fileCode: "",
           courseCode: "",
           fileName: "",
           fileDescription: "",
         });
+        setSelectedFile(null);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
       }, 3000);
     } catch (error: any) {
       setError(
-        error.response.data.message ||
-          "Failed to add File check your data and try again."
+        error.response?.data?.message ||
+          "Failed to upload file. Please try again."
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedFile(e.target.files[0]);
+    }
+  };
+
+  const removeFile = () => {
+    setSelectedFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   };
 
@@ -60,11 +92,12 @@ const FileForm = () => {
         const { data } = await axios.get("/api/admin/courses");
         setCourses(data);
       } catch (error) {
-        console.log("error fetch courses")
+        console.log("Error fetching courses");
       }
     };
     fetchCourses();
   }, []);
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       {success && <p className="text-green-500 text-sm mt-1">{success}</p>}
@@ -80,9 +113,10 @@ const FileForm = () => {
             <input
               type="text"
               placeholder="FILE101"
-              value={file.fileCode}
-              onChange={(e) => setFile({ ...file, fileCode: e.target.value })}
+              value={fileData.fileCode}
+              onChange={(e) => setFileData({ ...fileData, fileCode: e.target.value })}
               className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+              required
             />
           </div>
 
@@ -92,14 +126,14 @@ const FileForm = () => {
               <FaHashtag className="mr-2 text-primary" />
               Course Code (Required)
             </label>
-
             <select
               className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-              value={file.courseCode}
-              onChange={(e) => setFile({ ...file, courseCode: e.target.value })}
+              value={fileData.courseCode}
+              onChange={(e) => setFileData({ ...fileData, courseCode: e.target.value })}
+              required
             >
-              <option value="">Select Department</option>
-              {courses.map((course) => (
+              <option value="">Select Course</option>
+              {courses.map((course: any) => (
                 <option key={course._id} value={course.courseCode}>
                   {course.courseCode}
                 </option>
@@ -117,9 +151,10 @@ const FileForm = () => {
           <input
             type="text"
             placeholder="Lecture 1 - Introduction"
-            value={file.fileName}
-            onChange={(e) => setFile({ ...file, fileName: e.target.value })}
+            value={fileData.fileName}
+            onChange={(e) => setFileData({ ...fileData, fileName: e.target.value })}
             className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+            required
           />
         </div>
 
@@ -132,25 +167,47 @@ const FileForm = () => {
           <textarea
             rows={4}
             placeholder="Brief description about the file..."
-            value={file.fileDescription}
+            value={fileData.fileDescription}
             onChange={(e) =>
-              setFile({ ...file, fileDescription: e.target.value })
+              setFileData({ ...fileData, fileDescription: e.target.value })
             }
             className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
+            required
           ></textarea>
         </div>
 
-        {/* File URL */}
+        {/* File Upload */}
         <div>
           <label className="text-sm font-medium text-text mb-1 flex items-center">
-            <FaLink className="mr-2 text-primary" />
-            File URL (Required)
+            <FaUpload className="mr-2 text-primary" />
+            File Upload (Required - PDF only)
           </label>
-          <input
-            type="text"
-            placeholder="https://your-s3-bucket/file.pdf"
-            className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary"
-          />
+          <div className="flex items-center gap-4">
+            <label className="cursor-pointer bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-lg border border-gray-300">
+              Choose File
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                className="hidden"
+                accept=".pdf"
+                required
+              />
+            </label>
+            {selectedFile && (
+              <div className="flex items-center gap-2">
+                <span className="text-sm">{selectedFile.name}</span>
+                <button
+                  type="button"
+                  onClick={removeFile}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  <FaTimes />
+                </button>
+              </div>
+            )}
+          </div>
+          <p className="text-xs text-gray-500 mt-1">Maximum file size: 10MB</p>
         </div>
 
         {/* Submit + Cancel Buttons */}
@@ -163,9 +220,10 @@ const FileForm = () => {
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark flex items-center"
+            disabled={loading}
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark flex items-center disabled:opacity-50"
           >
-            {loading ? "create..." : "create"}
+            {loading ? "Uploading..." : "Upload File"}
           </button>
         </div>
       </form>

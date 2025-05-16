@@ -5,6 +5,7 @@ export interface IFile extends Document {
   courseCode: string;
   fileName: string;
   fileDescription: string;
+  fileUrl: string;
 }
 
 export const filesSchema = new Schema<IFile>(
@@ -23,6 +24,10 @@ export const filesSchema = new Schema<IFile>(
       required: true,
     },
     fileDescription: {
+      type: String,
+      required: true,
+    },
+    fileUrl: { 
       type: String,
       required: true,
     },
