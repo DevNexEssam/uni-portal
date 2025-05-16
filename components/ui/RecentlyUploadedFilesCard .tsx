@@ -3,10 +3,11 @@ import { FiFileText } from 'react-icons/fi';
 import { RecentlyUploadedFilesCardProps } from '../../types';
 
 
-const RecentlyUploadedFilesCard = ({ fileName , course , date } : RecentlyUploadedFilesCardProps) => {
+const RecentlyUploadedFilesCard = ({ fileName , course , date , fileUrl } : RecentlyUploadedFilesCardProps) => {
   return (
     <div className="space-y-4">
-        <div
+      <a href={fileUrl} download>
+          <div
           className="flex items-center justify-between rounded-lg border border-slate-200 p-3 hover:bg-background"
         >
           <div className="flex items-center gap-3">
@@ -22,6 +23,7 @@ const RecentlyUploadedFilesCard = ({ fileName , course , date } : RecentlyUpload
             <span className="text-xs text-text-secondary">{date}</span>
           </div>
         </div>
+      </a>
     </div>
   );
 };

@@ -52,6 +52,7 @@ export interface Feature {
     date: string;
     icon?: React.ReactNode;
     course?: string;
+    fileUrl : string
   }
 
   export interface UpcomingScheduleCardProps {

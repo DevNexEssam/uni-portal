@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import Link from "next/link";
-import RecentlyUploadedFilesCard from "@/components/ui/RecentlyUploadedFilesCard ";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import StartSection from "@/components/student/StartSection";
 import UpcomingScheduleSection from "../../../../components/student/UpcomingScheduleSection";
+import RecentlyUploadedSection from "../../../../components/student/RecentlyUploadedSection";
 
 const DashboardPage = async () => {
   const session = await getServerSession(authOptions);
@@ -35,23 +35,7 @@ const DashboardPage = async () => {
               </Link>
             </span>
           </div>
-          <div className="flex flex-col gap-4">
-            <RecentlyUploadedFilesCard
-              fileName="course-1.pdf"
-              course="Course 1"
-              date="2023-10-01"
-            />
-            <RecentlyUploadedFilesCard
-              fileName="course-1.pdf"
-              course="Course 1"
-              date="2023-10-01"
-            />
-            <RecentlyUploadedFilesCard
-              fileName="course-1.pdf"
-              course="Course 1"
-              date="2023-10-01"
-            />
-          </div>
+        <RecentlyUploadedSection />
         </div>
         {/* Upcoming Schedule */}
         <UpcomingScheduleSection />
