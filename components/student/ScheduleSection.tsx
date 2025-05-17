@@ -42,7 +42,7 @@ const ScheduleSection = () => {
     fetchSchedule();
   }, []);
 
-  if (loading) return <Loading />;
+  if (loading) return <Loading bg="border-r-primary" />;
 
   const formatTime = (dateString: string) => {
     const date = new Date(dateString);
@@ -59,87 +59,110 @@ const ScheduleSection = () => {
   };
 
   return (
-    <div className="p-6 bg-background rounded-lg">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-text">Class Schedule</h2>
-        <p className="text-sm text-gray-500">
-          You have{" "}
-          <span className="text-primary font-semibold">{schedules.length}</span>{" "}
-          upcoming classes
-        </p>
-      </div>
-
-      <div className="space-y-4">
-        {schedules.length === 0 ? (
-          <div className="bg-white p-8 rounded-lg border border-gray-200 text-center">
-            <p className="text-gray-500">No classes scheduled yet</p>
-          </div>
-        ) : (
-          schedules.map((schedule) => (
-            <div
-              key={schedule._id}
-              className="bg-white p-5 rounded-lg border border-gray-200 hover:border-primary transition-all duration-200 shadow-sm hover:shadow-md"
-            >
-              <div className="flex flex-col md:flex-row gap-5">
-                {/* Date/time badge */}
-                <div className="flex flex-col items-center justify-center bg-primary/10 p-3 rounded-lg min-w-[120px]">
-                  <FaCalendarDay className="text-primary text-xl mb-1" />
-                  <span className="text-sm font-medium text-primary">
-                    {formatDate(schedule.startTime)}
-                  </span>
-                  <div className="flex items-center mt-1 text-sm text-gray-600">
-                    <span>{formatTime(schedule.startTime)}</span>
-                    <span className="mx-1">-</span>
-                    <span>{formatTime(schedule.endTime)}</span>
-                  </div>
-                </div>
-
-                {/* Class details */}
-                <div className="flex-1">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-800">
-                        {schedule.meetingTitle}
-                      </h3>
-                      <div className="flex items-center text-sm text-primary mt-1">
-                        <FaIdBadge className="mr-1" />
-                        <span>{schedule.meetingCode}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FaChalkboardTeacher className="mr-2 text-primary" />
-                      <span>{schedule.instructor}</span>
-                    </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FaUniversity className="mr-2 text-primary" />
-                      <span>{schedule.faculty}</span>
-                    </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FaLayerGroup className="mr-2 text-primary" />
-                      <span>{schedule.academicLevel}</span>
-                    </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <FaMapMarkerAlt className="mr-2 text-primary" />
-                      <span>{schedule.department}</span>
-                    </div>
-                  </div>
-
-                  {schedule.description && (
-                    <div className="mt-4 p-3 bg-gray-50 rounded text-sm text-gray-700 border-l-4 border-primary">
-                      <p className="font-medium text-gray-800 mb-1">
-                        Class Notes:
-                      </p>
-                      {schedule.description}
-                    </div>
-                  )}
-                </div>
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
+          <div className="bg-primary px-6 py-5">
+            <div className="flex justify-between items-start">
+              <div>
+                <h1 className="text-2xl font-bold text-white">Class Schedule</h1>
+                <p className="text-white/90 mt-1">
+                  {schedules.length} upcoming classes
+                </p>
+              </div>
+              <div className="p-2 rounded-lg bg-white">
+                <FaCalendarDay className="text-xl text-primary" />
               </div>
             </div>
-          ))
-        )}
+          </div>
+        </div>
+
+        {/* Schedule List */}
+        <div className="space-y-4">
+          {schedules.length === 0 ? (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+              <p className="text-gray-500">No classes scheduled yet</p>
+            </div>
+          ) : (
+            schedules.map((schedule) => (
+              <div
+                key={schedule._id}
+                className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
+              >
+                <div className="p-6">
+                  <div className="flex flex-col md:flex-row gap-6">
+                    {/* Date/Time Badge */}
+                    <div className="flex flex-col items-center justify-center bg-primary/10 p-4 rounded-lg min-w-[120px]">
+                      <span className="text-sm font-medium text-primary">
+                        {formatDate(schedule.startTime)}
+                      </span>
+                      <div className="flex items-center mt-2 text-sm text-primary">
+                        <span>{formatTime(schedule.startTime)}</span>
+                        <span className="mx-1">-</span>
+                        <span>{formatTime(schedule.endTime)}</span>
+                      </div>
+                    </div>
+
+                    {/* Class Details */}
+                    <div className="flex-1">
+                      <div className="mb-4">
+                        <h3 className="text-xl font-semibold text-gray-800">
+                          {schedule.meetingTitle}
+                        </h3>
+                        <div className="flex items-center text-sm text-primary mt-1">
+                          <FaIdBadge className="mr-2" />
+                          <span>{schedule.meetingCode}</span>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="flex items-center">
+                          <FaChalkboardTeacher className="text-primary-light text-lg mr-3" />
+                          <div>
+                            <p className="text-sm text-gray-500">Instructor</p>
+                            <p className="font-medium">{schedule.instructor}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center">
+                          <FaMapMarkerAlt className="text-primary-light text-lg mr-3" />
+                          <div>
+                            <p className="text-sm text-gray-500">Faculty</p>
+                            <p className="font-medium">{schedule.faculty}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center">
+                          <FaLayerGroup className="text-primary-light text-lg mr-3" />
+                          <div>
+                            <p className="text-sm text-gray-500">Level</p>
+                            <p className="font-medium">{schedule.academicLevel}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center">
+                          <FaUniversity className="text-primary-light text-lg mr-3" />
+                          <div>
+                            <p className="text-sm text-gray-500">Department</p>
+                            <p className="font-medium">{schedule.department}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {schedule.description && (
+                        <div className="mt-6 p-4 bg-gray-50 rounded-lg border-l-4 border-primary">
+                          <h4 className="font-medium text-gray-800 mb-2">Class Notes:</h4>
+                          <p className="text-gray-600">{schedule.description}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

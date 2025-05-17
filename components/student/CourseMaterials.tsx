@@ -136,7 +136,7 @@ export default function CourseMaterials() {
               {course.files.map((file) => (
                 <div
                   key={file.fileCode}
-                  className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50"
+                  className="flex flex-col gap-5 items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 md:flex-row"
                 >
                   <div className="flex items-center">
                     <FaFilePdf className="text-red-500 text-2xl mr-4" />
@@ -156,7 +156,7 @@ export default function CourseMaterials() {
                   <a
                     href={file.fileUrl}
                     download
-                    className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+                    className="px-4 py-2 bg-primary text-sm text-white rounded-lg hover:bg-primary-dark transition-colors"
                   >
                     Download File
                   </a>

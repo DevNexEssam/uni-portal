@@ -66,7 +66,7 @@ export default function AllFiles() {
         <div className="mb-6">
           <Link
             href="/student/dashboard"
-            className="flex items-center text-blue-600 hover:underline"
+            className="flex items-center text-blue-600 w-max hover:underline"
           >
             <FaArrowLeft className="mr-2" />
             Back to Dashboard
@@ -122,7 +122,7 @@ export default function AllFiles() {
               filteredFiles.map((file) => (
                 <div
                   key={file.id}
-                  className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex flex-col gap-5 items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors md:flex-row"
                 >
                   <div className="flex items-start">
                     <FaFilePdf className="text-red-500 text-xl mr-4 mt-1" />
@@ -133,7 +133,7 @@ export default function AllFiles() {
                       <p className="text-sm text-gray-500 mt-1">
                         {file.fileDescription}
                       </p>
-                      <div className="flex items-center mt-2">
+                      <div className="flex flex-col gap-5 items-center mt-2 md:flex-row">
                         <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded mr-2">
                           {file.courseCode}
                         </span>
