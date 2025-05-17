@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
 import Student from "@/models/student";
 import "@/models/course";
-import "@/models/file";
+import "@/models/file"; 
 
 export async function GET(req: Request) {
   const session = await getServerSession(authOptions);
@@ -28,16 +28,5 @@ export async function GET(req: Request) {
     return NextResponse.json({ message: "Student not found" }, { status: 404 });
   }
 
-  const allFiles = student.courses.flatMap(course => 
-    course.files.map(file => ({
-      ...file.toObject(),
-      courseName: course.courseName,
-      courseCode: course.courseCode
-    }))
-  );
-
-  return NextResponse.json({ 
-    files: allFiles,
-    totalFiles: allFiles.length
-  });
+  return NextResponse.json({ courses: student.courses || [] });
 }

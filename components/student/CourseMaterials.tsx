@@ -165,65 +165,6 @@ export default function CourseMaterials() {
             </div>
           </div>
         )}
-
-        {/* Additional Sections */}
-        <div className="mt-8 grid md:grid-cols-2 gap-6">
-          {/* Lectures Section */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              Upcoming Lectures
-            </h3>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                <div>
-                  <p className="font-medium">Lecture 4: Algorithms</p>
-                  <p className="text-sm text-gray-500">Mon, Nov 6 • 10:00 AM</p>
-                </div>
-                <span className="bg-primary/10 text-primary text-xs px-2 py-1 rounded">
-                  Room A12
-                </span>
-              </div>
-              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                <div>
-                  <p className="font-medium">Lecture 5: OOP Principles</p>
-                  <p className="text-sm text-gray-500">Wed, Nov 8 • 10:00 AM</p>
-                </div>
-                <span className="bg-primary/10 text-primary text-xs px-2 py-1 rounded">
-                  Room A12
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Assignments Section */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              Recent Assignments
-            </h3>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                <div>
-                  <p className="font-medium">Assignment 1: Data Structures</p>
-                  <p className="text-sm text-gray-500">Due: Nov 10, 2023</p>
-                </div>
-                <span className="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">
-                  Pending
-                </span>
-              </div>
-              <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                <div>
-                  <p className="font-medium">Quiz 1: Basic Concepts</p>
-                  <p className="text-sm text-gray-500">
-                    Submitted: Oct 28, 2023
-                  </p>
-                </div>
-                <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
-                  92%
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

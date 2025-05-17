@@ -12,6 +12,7 @@ type Course = {
   courseName: string;
   instructor: string;
   department: string;
+  files : string
 };
 
 export default function CourseSection() {
@@ -22,6 +23,7 @@ export default function CourseSection() {
     const fetchCourses = async () => {
       try {
         const { data } = await axios.get("/api/student/courses");
+        console.log(data)
         setCourses(data.courses);
       } catch (error) {
         console.error("Error fetching courses:", error);
@@ -64,7 +66,7 @@ export default function CourseSection() {
                           {course.courseCode}
                         </span>
                         <h3 className="text-2xl font-bold mt-1 text-white">
-                          {course.courseName}
+                          {course.courseName} Course
                         </h3>
                       </div>
                       <div className="p-2 rounded-lg bg-white">
@@ -99,7 +101,7 @@ export default function CourseSection() {
                       <div className="pt-2">
                         <div className="flex justify-between text-xs text-gray-500 mb-1">
                           <span>Lectures</span>
-                          <span>10 sessions</span>
+                          <span>{course.files.length}</span>
                         </div>
                       </div>
                     </div>

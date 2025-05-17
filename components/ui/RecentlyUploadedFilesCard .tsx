@@ -8,9 +8,9 @@ const RecentlyUploadedFilesCard = ({ fileName , course , date , fileUrl } : Rece
     <div className="space-y-4">
       <a href={fileUrl} download>
           <div
-          className="flex items-center justify-between rounded-lg border border-slate-200 p-3 hover:bg-background"
+          className="flex flex-col gap-5 items-center justify-between rounded-lg border border-slate-200 p-3 hover:bg-background md:flex-row"
         >
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col items-center gap-3 md:flex-row">
             <div className="flex h-10 w-10 items-center justify-center rounded bg-primary/10 text-primary">
               <FiFileText className="h-5 w-5" />
             </div>

@@ -27,7 +27,7 @@ const UpcomingScheduleSection = () => {
     if (loading) return <div className="border border-slate-200 rounded-lg p-4"><Loading /></div>;
   return (
     <div className="border border-slate-200 rounded-lg p-4">
-    <div className="flex items-center justify-between mb-4">
+    <div className="flex flex-col items-center justify-between mb-4 md:flex-row">
       <span className="text-text font-bold">Upcoming Schedule</span>
       <span>
         <Link
@@ -39,14 +39,16 @@ const UpcomingScheduleSection = () => {
       </span>
     </div>
     <div className="flex flex-col gap-4">
-      {schedules.map((schedule: any) => (
+      {schedules.length > 0 ? schedules.map((schedule: any) => (
         <UpcomingScheduleCard
           key={schedule._id}
           title={schedule.meetingTitle}
           course="Course 1"
           time={schedule.startTime}
         />
-      ))}
+      )) : (
+        <div className="text-gray-500 text-center py-4">No files found</div>
+      )}
     </div>
   </div>
   )

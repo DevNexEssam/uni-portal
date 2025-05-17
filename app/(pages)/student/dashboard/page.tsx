@@ -23,20 +23,9 @@ const DashboardPage = async () => {
       {/* bottom */}
       <div className="grid grid-cols-2 gap-5 mt-5">
         {/* Recently Uploaded Files */}
-        <div className="border border-slate-200 rounded-lg p-4">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-text font-bold">Recently Uploaded Files</span>
-            <span>
-              <Link
-                href="/dashboard"
-                className="text-xs text-primary hover:underline font-medium"
-              >
-                View all files
-              </Link>
-            </span>
-          </div>
         <RecentlyUploadedSection />
-        </div>
+        {/* <div className="border border-slate-200 rounded-lg p-4">
+        </div> */}
         {/* Upcoming Schedule */}
         <UpcomingScheduleSection />
       </div>

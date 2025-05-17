@@ -1,9 +1,10 @@
+import AllFilesSection from "@/components/student/AllFilesSection"
 
 const page = () => {
   return (
-    <div>
-      files page
-    </div>
+    <>
+    <AllFilesSection />
+    </>
   )
 }
 
